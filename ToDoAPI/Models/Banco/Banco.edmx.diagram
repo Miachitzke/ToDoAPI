@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d544c32f287349d5b01832b54b636939" Name="Diagram1">
-        <EntityTypeShape EntityType="ToDoAppModel.ListaTarefa" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="ToDoAppModel.ListaTarefa" Width="1.5" PointX="0.625" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ToDoAppModel.Tarefa" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
         <EntityTypeShape EntityType="ToDoAppModel.TarefaHist" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="ToDoAppModel.TarefaUsuario" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />

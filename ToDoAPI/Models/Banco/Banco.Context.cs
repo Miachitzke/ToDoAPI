@@ -13,9 +13,9 @@ namespace ToDoAPI.Models.Banco
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ToDoAppEntities1 : DbContext
+    public partial class ToDoAppEntities : DbContext
     {
-        public ToDoAppEntities1()
+        public ToDoAppEntities()
             : base("name=ToDoAppEntities1")
         {
         }

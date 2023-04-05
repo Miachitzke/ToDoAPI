@@ -1,4 +1,6 @@
-﻿namespace ToDoAPP.Models
+﻿using System.Collections.Generic;
+
+namespace ToDoAPP.Models
 {
     public class UsuarioTarefa
     {
@@ -7,7 +9,7 @@
         public int UsuarioID { get; set; }
         public string NivelPermissao { get; set; }
 
-        public virtual Tarefa Tarefas { get; set; }
-        public virtual Usuario Usuarios { get; set; }
+        public virtual ICollection<Tarefa>Tarefas { get; set; }
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

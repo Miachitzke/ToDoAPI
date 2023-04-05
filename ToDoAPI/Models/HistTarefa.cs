@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ToDoAPP.Models
 {
@@ -10,7 +11,7 @@ namespace ToDoAPP.Models
         public DateTime DataAcao { get; set; }
         public string Acao { get; set; }
 
-        public virtual Tarefa Tarefas { get; set; }
-        public virtual Usuario Usuarios { get; set; }
+        public virtual ICollection<Tarefa> Tarefas { get; set; }
+        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }

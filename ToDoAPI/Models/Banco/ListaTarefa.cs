@@ -17,13 +17,14 @@ namespace ToDoAPI.Models.Banco
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ListaTarefa()
         {
-            this.Tarefa = new HashSet<Tarefa>();
+            this.Tarefas = new HashSet<Tarefa>();
         }
     
         public int ID { get; set; }
         public string Nome { get; set; }
-    
+        public int UsuarioID { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tarefa> Tarefa { get; set; }
+        public virtual ICollection<Tarefa> Tarefas { get; set; }
     }
 }
