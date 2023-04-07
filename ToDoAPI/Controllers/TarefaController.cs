@@ -1,36 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
-using ToDoAPI.Models.Banco;
-using ToDoAPP.Models;
+using ToDoAPI.Data;
+using ToDoAPI.Models;
 
 namespace ToDoAPI.Controllers
 {
+    [RoutePrefix("api/tarefas/")]
     public class TarefaController : ApiController
-    {
-        ToDoAppEntities db = new ToDoAppEntities();
+    {        
 
-        [HttpGet]
-        [Route("api/ListarTarefas/{UsuarioID}")]
-        public IEnumerable<ListaTarefas> ListarTarefas(int UsuarioID)
+        [HttpGet, Route("BuscarLista/{UsuarioID}")]
+        public IEnumerable<ListaTarefas> BuscarLista(int UsuarioID)
         {
-            using(db)
-            {
-                var lista = db.ListaTarefa
-                    .Where(lt => lt.UsuarioID == UsuarioID)
-                    .Select(l => new ListaTarefas
-                    {
-                        ID = l.ID,
-                        NomeLista = l.Nome,
-                        Tarefas = (ICollection<ToDoAPP.Models.Tarefa>)l.Tarefas
-                    })
-                    .ToList();
-                return lista;
-            }
+            return TarefaCRUD.BuscarLista(UsuarioID);
         }
-        //TODO finalizar requisições 
+        
+        [HttpGet, Route("ListarTarefas/{ListaID}")]
+        public List<Tarefa> ListarTarefas(int ListaID)
+        {
+            return TarefaCRUD.ListarTarefas(ListaID);
+        }
+
     }
 }

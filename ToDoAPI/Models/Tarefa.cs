@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ToDoAPP.Models
+namespace ToDoAPI.Models
 {
     public class Tarefa
     {
