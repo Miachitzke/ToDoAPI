@@ -10,8 +10,5 @@ namespace ToDoAPI.Models
         public int UsuarioID { get; set; }
         public DateTime DataAcao { get; set; }
         public string Acao { get; set; }
-
-        public virtual ICollection<Tarefa> Tarefas { get; set; }
-        public virtual ICollection<Usuario> Usuarios { get; set; }
     }
 }
