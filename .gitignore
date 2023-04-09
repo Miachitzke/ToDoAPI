@@ -363,4 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Angular Packs
-ToDoListWeb\ClientApp\.angular\cache\14.0.3\angular-webpack\b269d7f531f42fde2af9c1339cafcdcc5c3739f2
+ToDoListWeb/ClientApp/.angular/cache/14.0.3/angular-webpack/b269d7f531f42fde2af9c1339cafcdcc5c3739f2/
