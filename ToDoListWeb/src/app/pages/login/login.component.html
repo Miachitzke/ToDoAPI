@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="card card-container">
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+        <p id="profile-name" class="profile-name-card"></p>
+
+        <form [formGroup]="formLogin" class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email" required autofocus>
+
+            <input type="password" id="senha" formControlName="senha" class="form-control" placeholder="Senha" required>
+
+            <button class="btn btn-lg btn-primary btn-block btn-signin" (click)="logar()">Entrar</button>
+            <div id="lembrar" class="checkbox">
+                <label>
+                    <input type="checkbox" [(ngModel)]="lembrar" value="lembrar"> Lembre-se de mim
+                </label>
+            </div>
+        </form>
+        
+        <p></p>
+        <a href="#" class="forgot-password" align="center">
+            Novo por aqui? Cadastre-se
+        </a>
+    </div>
+</div>
