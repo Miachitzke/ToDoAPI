@@ -4,5 +4,5 @@ export class Tarefas {
     descricao?: string;
     prioridade?: string;
     status?: string;
-
+    idLista?: number;
 }

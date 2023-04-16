@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { Tarefas } from 'src/app/services/tarefas';
-import { TarefasService } from 'src/app/services/tarefas.service';
+import { Component, NgModule } from '@angular/core';
+import { Listas } from 'src/app/services/listas';
+import { RouterModule } from '@angular/router';
+import { ListasService } from 'src/app/services/listas.services';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +9,12 @@ import { TarefasService } from 'src/app/services/tarefas.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
-  tarefas: Tarefas[] = [];
-  constructor(private tarefaService: TarefasService){}
+  listas: Listas[] = [];
+  
+  constructor(private listaService: ListasService){}
 
-  listarTarefas(){
-    this.tarefas = this.tarefaService.listarTarefas();
+  ngOnInit(){
+    this.listas = this.listaService.buscarListas();
   }
 
-}
+  }

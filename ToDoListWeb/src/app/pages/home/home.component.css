@@ -2,10 +2,14 @@ body {
     background: #eee;
 }
 
+i {
+    padding: 4px;
+}
+
 .icons i {
     color: #b5b3b3;
     border: 1px solid #b5b3b3;
-    padding: 6px;
+    padding: 01px;
     margin-left: 4px;
     border-radius: 5px;
     cursor: pointer;
@@ -14,6 +18,19 @@ body {
 .activity-done {
     font-weight: 600;
     text-align: center;
+}
+
+.linkTarefas {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #040b13;
+    padding:  2px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.linkTarefas:hover {
+    text-decoration: underline;
 }
 
 .list-group li {

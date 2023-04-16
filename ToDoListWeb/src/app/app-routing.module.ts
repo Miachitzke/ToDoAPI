@@ -5,13 +5,14 @@ import { Erro404Component } from './pages/shared/erro404/erro404.component';
 import { ListaTarefasComponent } from './pages/tarefas/listatarefas/listatarefas.component';
 import { TarefasComponent } from './pages/tarefas/tarefas/tarefas.component';
 import { HomeComponent } from './pages/home/home.component';
+import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
   path: 'login', component: LoginComponent
   },
   {
-    path: 'listartarefas' , component: HomeComponent   
+    path: 'listastarefa' , component: HomeComponent   
   },
   {
     path: 'novalista',component: ListaTarefasComponent,
@@ -20,7 +21,7 @@ const routes: Routes = [
     path: 'editarlista/:id',component:ListaTarefasComponent,
   },
   {
-    path: 'listartarefas',component: ListaTarefasComponent,
+    path: 'listartarefas/:idLista',component: ListaTarefasComponent,
   },
   {
     path: 'novatarefa',component: TarefasComponent,
@@ -29,15 +30,16 @@ const routes: Routes = [
     path: 'editartarefa/:id',component:TarefasComponent,
   },
   /* {
-    path: 'novousuario',component:TarefasComponent,
+    path: '',component:TarefasComponent,
   }, */
   {
-    path: '**' , component: Erro404Component, 
+    path: '**', component: Erro404Component, 
   }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule, FormsModule],
+  declarations: [LoginComponent]
 })
 export class AppRoutingModule { }

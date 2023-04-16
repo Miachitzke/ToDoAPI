@@ -33,7 +33,7 @@ logar(usuario: IUsuario, lembrar:boolean) {
       
       this.mostrarMenuEmitter.emit(true);
 
-      this.router.navigate(['listartarefas']);
+      this.router.navigate(['listastarefa']);
     }
     else
     {
