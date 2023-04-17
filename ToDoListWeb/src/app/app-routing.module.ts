@@ -5,7 +5,6 @@ import { Erro404Component } from './pages/shared/erro404/erro404.component';
 import { ListaTarefasComponent } from './pages/tarefas/listatarefas/listatarefas.component';
 import { TarefasComponent } from './pages/tarefas/tarefas/tarefas.component';
 import { HomeComponent } from './pages/home/home.component';
-import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -38,8 +37,6 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule, FormsModule],
-  declarations: [LoginComponent]
+  imports: [RouterModule.forRoot(routes)]
 })
 export class AppRoutingModule { }
