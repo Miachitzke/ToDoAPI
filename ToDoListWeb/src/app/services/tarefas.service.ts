@@ -7,11 +7,11 @@ import { Tarefas } from './tarefas';
 export class TarefasService {
   tarefa: Tarefas[] = [
     { id:1 , titulo: 'Reunião com a equipe de desenvolvimento', descricao: 'Agendar reunião com a equipe de desenvolvimento para alinhar as próximas etapas do projeto', prioridade: 'Normal', status: 'Em Andamento', idLista:1 },
-    { id:2 , titulo: 'Implementação da funcionalidade de notificação', descricao: 'Implementar funcionalidade de notificação para alertar os usuários sobre novas atualizações no sistema', prioridade: 'Urgente', status: 'Concluído', idLista:3 },
+    { id:2 , titulo: 'Implementação da funcionalidade de notificação', descricao: 'Implementar funcionalidade de notificação para alertar os usuários sobre novas atualizações no sistema', prioridade: 'Urgente', status: 'Concluído', idLista:1 }, /*  */
     { id:3 , titulo: 'Correção de erro na geração de relatório', descricao: 'Corrigir erro na geração de relatório que está impedindo a visualização dos dados corretos', prioridade: 'Normal', status: 'A fazer', idLista:2 },
     { id:4 , titulo: 'Teste de desempenho do sistema', descricao: 'Realizar teste de desempenho do sistema para identificar gargalos e pontos de melhoria', prioridade: 'Normal', status: 'Em Andamento', idLista:1 },
     { id:5 , titulo: 'Melhoria na interface de usuário', descricao: 'Realizar melhorias na interface de usuário para tornar o sistema mais amigável e intuitivo', prioridade: 'Urgente', status: 'Concluído', idLista:2 },
-    { id:6 , titulo: 'Análise de dados de vendas', descricao: 'Analisar dados de vendas dos últimos três meses para identificar padrões e tendências de consumo', prioridade: 'Normal', status: 'Em Andamento', idLista:3 },
+    { id:6 , titulo: 'Análise de dados de vendas', descricao: 'Analisar dados de vendas dos últimos três meses para identificar padrões e tendências de consumo', prioridade: 'Normal', status: 'Em Andamento', idLista:1 }, /*   */
     { id:7 , titulo: 'Implementação de novo método de pagamento', descricao: 'Implementar novo método de pagamento para ampliar as opções de pagamento para os usuários', prioridade: 'Urgente', status: 'A fazer', idLista:1 },
     { id:8 , titulo: 'Correção de erro na autenticação do usuário', descricao: 'Corrigir erro na autenticação do usuário que está impedindo o acesso ao sistema', prioridade: 'Normal', status: 'Em Andamento', idLista:2 },
     { id:9 , titulo: 'Teste de aceitação do sistema', descricao: 'Realizar teste de aceitação do sistema para verificar se todas as funcionalidades estão funcionando corretamente', prioridade: 'Normal', status: 'A fazer', idLista:3 },

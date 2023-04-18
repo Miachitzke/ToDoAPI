@@ -11,6 +11,7 @@ import { TarefasService } from 'src/app/services/tarefas.service';
 export class ListaTarefasComponent implements OnInit {
   idLista?: number;
   tarefas: Tarefas[] = [];
+  checkbox: any;
 
   constructor(private route: ActivatedRoute, private tarefasService: TarefasService) { }
 
@@ -18,6 +19,17 @@ export class ListaTarefasComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.idLista = +params.get('idLista')!;
       this.tarefas = this.tarefasService.listarTarefas(this.idLista);
+    });
+  }
+
+  ngAfterViewInit(){
+    const elementos = document.querySelectorAll('.click-linha');
+
+    elementos.forEach(elemento => {      
+        elemento.addEventListener('click', () => {
+          this.checkbox = elemento.querySelector('.custom-control-input') as HTMLInputElement;
+          this.checkbox.checked = !this.checkbox.checked;        
+        });      
     });
   }
 }

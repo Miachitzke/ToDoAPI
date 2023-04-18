@@ -10,7 +10,9 @@ body {
 }
 
 .container{
-    margin-top:20px;
+    height: 100%;
+    margin-top:60px;
+    margin-bottom: 20px;
 }
 
 .card {
@@ -34,10 +36,16 @@ body {
     height: 3.5rem;
     background-color: #fff;
 }
+
 .widget-subheading{
     color: #858a8e;
     font-size: 10px;
 }
+
+.checked {
+    text-decoration: line-through;
+}
+
 .card-header.card-header-tab .card-header-title {
     display: flex;
     align-items: center;
