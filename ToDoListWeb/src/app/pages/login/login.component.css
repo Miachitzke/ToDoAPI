@@ -16,6 +16,8 @@ body, html {
     -webkit-user-select: none;
     user-select: none;
     cursor: default;
+    background-color: #295bda;
+    border-color: #295bda;
 }
 
 .card {
@@ -109,12 +111,15 @@ body, html {
     -moz-transition: all 0.218s;
     -webkit-transition: all 0.218s;
     transition: all 0.218s;
+    background-color: #295bda;
+    border-color: #295bda;
 }
 
 .btn-signin:hover,
 .btn-signin:active,
 .btn-signin:focus {
-    background-color: rgb(12, 97, 33);
+    background-color: #295bdab0;
+    cursor: pointer;
 }
 
 .forgot-password {

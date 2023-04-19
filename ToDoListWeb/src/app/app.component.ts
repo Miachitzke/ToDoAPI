@@ -8,7 +8,7 @@ import { Router, NavigationEnd } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  rotasNaoMostrar = ['login','novousuario'];
+  rotasNaoMostrar = ['login','novousuario','**',''];
 
   mostrarMenu : boolean = false;
 
