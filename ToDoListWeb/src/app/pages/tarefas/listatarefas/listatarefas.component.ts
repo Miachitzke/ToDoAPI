@@ -11,7 +11,7 @@ import { TarefasService } from 'src/app/services/tarefas.service';
 export class ListaTarefasComponent implements OnInit {
   idLista?: number;
   tarefas: Tarefas[] = [];
-
+  
   constructor(private route: ActivatedRoute, private tarefasService: TarefasService) { }
 
   ngOnInit() {
