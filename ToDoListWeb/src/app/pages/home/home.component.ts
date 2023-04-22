@@ -1,5 +1,5 @@
 import { Component, NgModule } from '@angular/core';
-import { Listas } from 'src/app/services/listas';
+import { Listas } from 'src/app/interfaces/IListas';
 import { RouterModule } from '@angular/router';
 import { ListasService } from 'src/app/services/listas.services';
 

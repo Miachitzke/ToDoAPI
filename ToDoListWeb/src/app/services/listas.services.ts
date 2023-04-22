@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Listas } from './listas';
+import { Listas } from '../interfaces/IListas';
 
 @Injectable({
 providedIn: 'root'

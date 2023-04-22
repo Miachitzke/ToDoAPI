@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Tarefas } from './tarefas';
+import { ITarefas } from '../interfaces/ITarefas';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TarefasService {
-  tarefa: Tarefas[] = [
+  tarefa: ITarefas[] = [
     { id:1 , titulo: 'Reunião com a equipe de desenvolvimento', descricao: 'Agendar reunião com a equipe de desenvolvimento para alinhar as próximas etapas do projeto', prioridade: 'Normal', status: 'Em Andamento', idLista:1 },
     { id:2 , titulo: 'Implementação da funcionalidade de notificação', descricao: 'Implementar funcionalidade de notificação para alertar os usuários sobre novas atualizações no sistema', prioridade: 'Urgente', status: 'Concluído', idLista:1 }, /*  */
     { id:3 , titulo: 'Correção de erro na geração de relatório', descricao: 'Corrigir erro na geração de relatório que está impedindo a visualização dos dados corretos', prioridade: 'Normal', status: 'A fazer', idLista:2 },

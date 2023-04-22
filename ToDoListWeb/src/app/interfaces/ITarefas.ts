@@ -1,4 +1,4 @@
-export class Tarefas {
+export class ITarefas {
     id?: number;
     titulo?: string;
     descricao?: string;

@@ -12,6 +12,9 @@ import { Erro404Component } from './pages/shared/erro404/erro404.component';
 import { ListaTarefasComponent } from './pages/tarefas/listatarefas/listatarefas.component';
 import { TarefasComponent } from './pages/tarefas/tarefas/tarefas.component';
 import { RouterModule } from '@angular/router';
+import { ModaltarefasComponent } from './pages/tarefas/acaotarefas/modaltarefas.component';
+import { MarkdownModule } from 'ngx-markdown';
+import { AcaoUsuarioComponent } from './pages/usuarios/acaousuario.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,9 @@ import { RouterModule } from '@angular/router';
     HomeComponent,
     Erro404Component,
     ListaTarefasComponent,
-    TarefasComponent
+    TarefasComponent,
+    ModaltarefasComponent,
+    AcaoUsuarioComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,9 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    MarkdownModule.forRoot(),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
