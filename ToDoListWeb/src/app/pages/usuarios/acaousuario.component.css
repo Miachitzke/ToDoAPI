@@ -1,0 +1,8 @@
+span {
+    display: flex;
+}
+
+.card {
+    height: auto;
+    width: 70%;
+}

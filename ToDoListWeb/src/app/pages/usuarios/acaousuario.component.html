@@ -1,32 +1,26 @@
-<div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon1">@</span>
-    <input type="nome" class="form-control" placeholder="Nome completo" aria-label="Nome" aria-describedby="basic-addon1">
+<div class="container-fluid h-100">
+    <div class="row h-100 justify-content-center align-items-center">
+        <div class="card p-4">
+            <div class="input-group mb-3">
+                <span class="input-group-text far fa-circle-user"></span>
+                <input type="text" class="form-control" placeholder="Nome completo">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text far fa-envelope"></span>
+                <input type="email" name="email" class="form-control" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            </div>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text fa fa-lock"></span>
+                <input type="password" name="senha" class="form-control rounded-end" style="margin-right: 10px;" placeholder="Senha" required [(ngModel)]="senha" (input)="comparaSenha()">
+                <span class="input-group-text fa fa-lock rounded-start"></span>
+                <input type="password" name="confSenha" class="form-control " placeholder="Confirmar senha" required [(ngModel)]="confSenha" (input)="comparaSenha()">
+            </div>
+            <div *ngIf="!compara" class=" alert alert-danger">Senhas não conferem.</div>
+            <div align="end">
+                <button type="button" class="btn btn-primary" >Confirmar</button>
+            </div>
+        </div>
     </div>
-    
-    <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
-    <span class="input-group-text" id="basic-addon2">@example.com</span>
-    </div>
-    
-    <label for="basic-url" class="form-label">Your vanity URL</label>
-    <div class="input-group mb-3">
-    <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
-    <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-    </div>
-    
-    <div class="input-group mb-3">
-    <span class="input-group-text">$</span>
-    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-    <span class="input-group-text">.00</span>
-    </div>
-    
-    <div class="input-group mb-3">
-    <input type="text" class="form-control" placeholder="Username" aria-label="Username">
-    <span class="input-group-text">@</span>
-    <input type="text" class="form-control" placeholder="Server" aria-label="Server">
-    </div>
-    
-    <div class="input-group">
-    <span class="input-group-text">With textarea</span>
-    <textarea class="form-control" aria-label="With textarea"></textarea>
-    </div>
+</div>

@@ -6,6 +6,7 @@ import { ListaTarefasComponent } from './pages/tarefas/listatarefas/listatarefas
 import { TarefasComponent } from './pages/tarefas/tarefas/tarefas.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ModaltarefasComponent } from './pages/tarefas/acaotarefas/modaltarefas.component';
+import { AcaoUsuarioComponent } from './pages/usuarios/acaousuario.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,9 @@ const routes: Routes = [
   },
   {
     path: 'modal',component:ModaltarefasComponent,
+  },
+  {
+    path: 'novousuario',component:AcaoUsuarioComponent,
   },
   {
     path: '**', component: Erro404Component, 
