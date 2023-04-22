@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Tarefas } from 'src/app/services/tarefas';
+import { ITarefas } from 'src/app/interfaces/ITarefas';
 import { TarefasService } from 'src/app/services/tarefas.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { TarefasService } from 'src/app/services/tarefas.service';
   styleUrls: ['./tarefas.component.css']
 })
 export class TarefasComponent implements OnInit{
-  tarefas: Tarefas[] = [];
+  tarefas: ITarefas[] = [];
   idLista!:number; 
 
   constructor(private rota: ActivatedRoute, private tarefasService: TarefasService){}

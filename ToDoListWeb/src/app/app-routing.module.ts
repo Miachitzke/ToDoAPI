@@ -5,6 +5,7 @@ import { Erro404Component } from './pages/shared/erro404/erro404.component';
 import { ListaTarefasComponent } from './pages/tarefas/listatarefas/listatarefas.component';
 import { TarefasComponent } from './pages/tarefas/tarefas/tarefas.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ModaltarefasComponent } from './pages/tarefas/acaotarefas/modaltarefas.component';
 
 const routes: Routes = [
   {
@@ -28,9 +29,9 @@ const routes: Routes = [
   {
     path: 'editartarefa/:id',component:TarefasComponent,
   },
-  /* {
-    path: '',component:TarefasComponent,
-  }, */
+  {
+    path: 'modal',component:ModaltarefasComponent,
+  },
   {
     path: '**', component: Erro404Component, 
   }

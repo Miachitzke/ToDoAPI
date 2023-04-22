@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Tarefas } from 'src/app/services/tarefas';
+import { ITarefas } from 'src/app/interfaces/ITarefas';
 import { TarefasService } from 'src/app/services/tarefas.service';
 
 @Component({
@@ -10,9 +10,9 @@ import { TarefasService } from 'src/app/services/tarefas.service';
 })
 export class ListaTarefasComponent implements OnInit {
   idLista?: number;
-  tarefas: Tarefas[] = [];
+  tarefas: ITarefas[] = [];
   
-  constructor(private route: ActivatedRoute, private tarefasService: TarefasService) { }
+  constructor( private route: ActivatedRoute, private tarefasService: TarefasService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
