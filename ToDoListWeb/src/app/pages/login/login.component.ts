@@ -30,4 +30,17 @@ export class LoginComponent implements OnInit {
     var usuario = this.formLogin.getRawValue() as IUsuario;
     this.usuarioService.logar(usuario,this.lembrar!);
     }
+
+  senha!: string; 
+  confSenha!: string;
+  compara: boolean = true;
+
+  comparaSenha() {
+    if(this.senha === this.confSenha)
+      this.compara = true;
+    else
+      this.compara = false;
+  }
+
+  
 }

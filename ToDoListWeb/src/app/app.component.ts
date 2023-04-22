@@ -12,7 +12,7 @@ export class AppComponent {
 
   mostrarMenu : boolean = false;
 
-  constructor(private rota:Router ,private usuarioService: UsuarioService )
+  constructor(private rota: Router, private usuarioService: UsuarioService )
   {
     rota.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

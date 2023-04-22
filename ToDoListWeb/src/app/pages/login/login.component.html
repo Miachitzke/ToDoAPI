@@ -5,21 +5,61 @@
 
         <form [formGroup]="formLogin" class="form-signin">
             <span id="reauth-email" class="reauth-email"></span>
-            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email" required autofocus>
+            <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email" required
+                autofocus>
 
             <input type="password" id="senha" formControlName="senha" class="form-control" placeholder="Senha" required>
 
             <button class="btn btn-lg btn-primary btn-block btn-signin" (click)="logar()">Entrar</button>
             <div id="lembrar" class="checkbox">
                 <label>
-                    <input type="checkbox" id="lembrar" [ngModel]="lembrar" value="lembrar"> Lembre-se de mim
+                    <input type="checkbox" formControlName="lembrar" value="lembrar"> Lembre-se de mim
                 </label>
             </div>
         </form>
-        
+
         <p></p>
-        <a [routerLink]="['/novousuario']" class="forgot-password" align="center">
+        <button align="center" id="cadastrar" data-toggle="modal" data-target="#modalCadastro">
             Novo por aqui? Cadastre-se
-        </a>
+        </button>
+    </div>
+</div>
+
+<div class="modal fade" tabindex="-1" id="modalCadastro" aria-labelledby="modalCadastro" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalCadastroLabel">Cadastro de usuario</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <div class="container-fluid h-100">
+                        <div class="row h-100 justify-content-center align-items-center">
+                            <div class="card p-4">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text far fa-circle-user"></span>
+                                    <input type="text" class="form-control" placeholder="Nome completo">
+                                </div>
+                    
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text far fa-envelope"></span>
+                                    <input type="email" name="email" class="form-control" placeholder="Email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                </div>
+                    
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text fa fa-lock"></span>
+                                    <input type="password" name="senha" class="form-control rounded-end" style="margin-right: 10px;" placeholder="Senha" required [(ngModel)]="senha" (input)="comparaSenha()">
+                                    <span class="input-group-text fa fa-lock rounded-start"></span>
+                                    <input type="password" name="confSenha" class="form-control " placeholder="Confirmar senha" required [(ngModel)]="confSenha" (input)="comparaSenha()">
+                                </div>
+                                <div *ngIf="!compara" class=" alert alert-danger">Senhas não conferem.</div>
+                                <div align="end">
+                                    <button type="button" class="btn btn-primary" >Confirmar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
     </div>
 </div>
