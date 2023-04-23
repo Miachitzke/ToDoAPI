@@ -10,7 +10,7 @@ import { TarefasService } from 'src/app/services/tarefas.service';
 })
 export class ListaTarefasComponent implements OnInit {
   idLista?: number;
-  tarefas: Tarefas[] = [];
+  tarefas: ITarefas[] = [];
   checkbox: any;
 
   constructor(private route: ActivatedRoute, private tarefasService: TarefasService) { }
