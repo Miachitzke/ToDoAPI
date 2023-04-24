@@ -4,7 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IUsuario } from '../../interfaces/IUsuario';
 import { UsuarioService } from '../../services/usuario.service';
-
+import { HttpClient } from '@angular/common/http';
+import { AcaoUsuarioComponent } from '../usuarios/acaousuario.component';
 
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private usuarioService: UsuarioService,
-        private modalService: NgbModal) { }
+        private modalService: NgbModal,
+        private http: HttpClient) { }
 
     ngOnInit(): void {
         this.criarForm();
@@ -40,7 +42,7 @@ export class LoginComponent implements OnInit {
 
     }
 
-    openModal(content: any) {
+    openModal(content:any) {
         this.modalService.open(content, { centered: true });
     }
 
@@ -56,3 +58,4 @@ export class LoginComponent implements OnInit {
 
     }
 }
+

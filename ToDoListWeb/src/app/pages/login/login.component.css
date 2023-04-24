@@ -9,6 +9,10 @@ body, html {
     padding: 40px 40px;
 }
 
+span {
+    display: flex;
+}
+
 .btn {
     font-weight: 700;
     height: 36px;
