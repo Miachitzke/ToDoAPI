@@ -94,6 +94,10 @@ body {
     margin-bottom: 0;
 }
 
+.list-group-item:hover {
+    background-color: #e8e8e8;
+}
+
 .todo-prioridade {
     position: absolute;
     width: 8px;
@@ -111,6 +115,14 @@ body {
 
 .bg-padrao {
     background-color: #295bda;
+}
+
+.fill-urgente {
+    fill: #f73224 !important;
+}
+
+.fill-padrao {
+    fill: #295bda;
 }
 
 .widget-content {
@@ -170,4 +182,20 @@ body {
 
 .card-footer{
     background-color: #fff;
+}
+
+.input-titulo-tarefa {
+    font-size: 20px;
+    font-weight: 700 !important;
+    color: #565656;
+    border: none !important;
+    padding: 10px;
+}
+
+.no-resize {
+    resize: none;
+}
+
+.no-overflow {
+    overflow:hidden;
 }
