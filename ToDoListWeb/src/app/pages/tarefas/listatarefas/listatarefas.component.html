@@ -7,26 +7,41 @@
             </div>
             <div class="ps-content">
                 <ul class=" list-group list-group-flush">
-                    <li class="list-group-item " *ngFor="let tarefa of tarefas">
-                        <div class="todo-prioridade "
+                    <li class="list-group-item " *ngFor="let tarefa of tarefas; trak" (click)="openModal(tarefa)">
+                        <!-- <div class="todo-prioridade "
                             [ngClass]="{'bg-urgente': tarefa.prioridade === 'Urgente', 'bg-padrao': tarefa.prioridade !== 'Urgente'}">
-                        </div>
+                        </div> -->
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left mr-2">
-                                    <div class="custom-checkbox custom-control">
+                                    <div class="icon">
+                                        <svg width="35px" height="35px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <title>Concluir</title>
+                                            <defs></defs>
+                                            <g class="btn" id="Stockholm-icons-/-Home-/-Flower2" stroke="none" stroke-width="1" fill="none"
+                                                fill-rule="evenodd">
+                                                <polygon id="bound" points="0 0 24 0 24 24 0 24"></polygon>
+                                                <circle id="Oval-32" [ngClass]="{'fill-urgente': tarefa.prioridade === 'Urgente', 'fill-padrao': tarefa.prioridade !== 'Urgente'}" opacity="0.8" cx="12" cy="12" r="7"></circle>
+                                                <circle id="Oval-32-Copy" fill="#000000" opacity="0.3" cx="12" cy="12" r="5"></circle>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <!-- <div class="custom-checkbox custom-control">
                                         <input class="custom-control-input" id="exampleCustomCheckbox12"
                                             type="checkbox"><label class="custom-control-label"
                                             for="exampleCustomCheckbox12">&nbsp;</label>
-                                    </div>
+                                    </div> -->
+
                                 </div>
                                 <div class="widget-content-left">
-                                    <div class="widget-heading">{{tarefa.titulo}}</div>
+                                    <div class="widget-heading">{{tarefa.titulo}}
+                                    </div>
                                     <div class="widget-subheading"><i>{{tarefa.descricao}}</i></div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <button class="border-0 btn-transition btn btn-outline-success">
-                                        <i class="fa fa-check"></i></button>
+                                    <!-- <button class="border-0 btn-transition btn btn-outline-success">
+                                        <i class="fa fa-check"></i></button> -->
                                     <button class="border-0 btn-transition btn btn-outline-danger">
                                         <i class="fa fa-trash"></i>
                                     </button>
@@ -38,12 +53,76 @@
             </div>
             <div class="d-flex justify-content-between text-right card-footer">
                 <div>
-                    <button class="mr-2 btn btn-link btn-sm" [routerLink]="['/listastarefa']">Voltar</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#modalTarefa">Nova Tarefa</button>
+                    <button class="mr-2 btn btn-link btn-sm" [routerLink]="['/listastarefa']"> Voltar </button>
+                    <button type="button" class="btn btn-primary" (click)="openModal()"> Nova Tarefa </button>
                 </div>
                 <span>{{tarefas.length}} tarefas</span>
             </div>
         </div>
     </section>
 </div>
+
+<ng-template #modalTarefa let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="icon" (click)="modal.dismiss()">
+                <svg width="35px" height="35px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>Concluir</title>
+                    <defs></defs>
+                    <g class="btn" id="btnConcluir" stroke="none" stroke-width="1" fill="none"
+                        fill-rule="evenodd">
+                        <polygon id="bound" points="0 0 24 0 24 24 0 24"></polygon>
+                        <circle id="Oval-32" [ngStyle]="{fill: cor}" opacity="0.8" cx="12" cy="12" r="7"></circle>
+                        <circle id="Oval-32-Copy" fill="#000000" opacity="0.3" cx="12" cy="12" r="5"></circle>
+                    </g>
+                </svg>
+            </div>
+            <textarea #txtTitulo class="form-control input-titulo-tarefa no-resize no-overflow" rows=1 maxlength="500" *ngIf="tarefaSelecionada" [ngModel]="tarefaSelecionada.titulo" (ngModelChange)="resize(txtTitulo)"></textarea>
+            <button type="button" class="btn btn-close" (click)="modal.dismiss()"></button>
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group">
+                <div class="row">
+                    <label for="textarea" class="col-sm-2 control-label">Descrição:</label>
+                    <div class="col-12">
+                        <textarea name="" id="textarea" class="form-control no-resize" rows="4" *ngIf="tarefaSelecionada" [ngModel]="tarefaSelecionada.descricao"></textarea>
+                    </div>
+                </div>
+
+                <br>
+                
+                <div class="row">
+                    <div class="col-4 ">
+                        <label class="label">Prioridade:</label>
+                        <select class="form-control" type="text" *ngIf="tarefaSelecionada" [ngModel]="tarefaSelecionada.prioridade">
+                            <option value="">🔴 Urgente</option>
+                            <option value="">🟡 Importante</option>
+                            <option value="">🔵 Normal</option>
+                            <option value="">⚫ Ocasional</option>
+                        </select>
+                    </div>
+
+                    <div class="col-4 ">
+                        <label class="label">Prazo:</label>
+                        <input class="form-control" type="text" name="" id="" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
+                    </div>
+                    
+                    <div class="col-4">
+                        <label class="label">Etiqueta:</label>
+                        <select class="form-control" type="text" *ngIf="tarefaSelecionada" [ngModel]="tarefaSelecionada.status">
+                            <option value=""></option>
+                            <option value="">💰Pagamento</option>
+                            <option value="">👉Delegar</option>
+                            <option value="">🔀Opcional</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Confirmar</button>
+        </div>
+    </div>
+</ng-template>

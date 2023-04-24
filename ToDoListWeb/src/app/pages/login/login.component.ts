@@ -7,7 +7,6 @@ import { UsuarioService } from '../../services/usuario.service';
 import { HttpClient } from '@angular/common/http';
 import { AcaoUsuarioComponent } from '../usuarios/acaousuario.component';
 
-
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',

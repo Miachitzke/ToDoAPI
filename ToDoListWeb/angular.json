@@ -5,7 +5,11 @@
   "projects": {
     "ToDoListWeb": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -20,12 +24,13 @@
               "zone.js"
             ],
             "tsConfig": "tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [              
-              "src/styles.css"
+            "styles": [
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -82,28 +87,21 @@
               "zone.js/testing"
             ],
             "tsConfig": "tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "node_modules/@fortawesome/fontawesome-free/webfonts",
-                "output": "/webfonts/"
-              }
+              "src/assets"
             ],
-            "styles": [              
-              "src/styles.css",
-              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+            "styles": [
+              "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/marked/marked.min.js"
-            ]
+            "scripts": []
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": "b51fb346-816a-4df8-a709-079a3ab07e93"
+    "analytics": "4e60f4e6-feea-4331-a6ca-8456fb1b241e"
   }
 }

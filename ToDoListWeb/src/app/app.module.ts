@@ -15,6 +15,8 @@ import { RouterModule } from '@angular/router';
 import { ModaltarefasComponent } from './pages/tarefas/acaotarefas/modaltarefas.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { AcaoUsuarioComponent } from './pages/usuarios/acaousuario.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { AcaoUsuarioComponent } from './pages/usuarios/acaousuario.component';
     ListaTarefasComponent,
     TarefasComponent,
     ModaltarefasComponent,
-    AcaoUsuarioComponent
+    AcaoUsuarioComponent,
+    SidebarComponent
+
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,7 @@ import { AcaoUsuarioComponent } from './pages/usuarios/acaousuario.component';
     FormsModule,
     RouterModule,
     MarkdownModule.forRoot(),
-    
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
