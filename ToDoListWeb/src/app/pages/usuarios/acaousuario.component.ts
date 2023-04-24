@@ -18,4 +18,16 @@ export class AcaoUsuarioComponent {
       this.compara = false;
   }
 
+  senha!: string;
+  confSenha!: string;
+  compara: boolean = true;
+
+  comparaSenha() {
+      if (this.senha === this.confSenha)
+          this.compara = true;
+      else
+          this.compara = false;
+
+  }
+
 }
