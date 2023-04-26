@@ -45,4 +45,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  public baseURL = 'https://localhost:7188/';
+}

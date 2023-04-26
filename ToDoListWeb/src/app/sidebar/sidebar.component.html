@@ -1,84 +1,20 @@
 <div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
-    <div class="header">
-        <h1 class="title">
-            deskbird
-        </h1>
-        <div class="toggle" (click)="handleSidebarToggle()">
-            <span class="chevron"></span>
-        </div>
+    <div class="header d-flex">
+        <div class="content" >                
+            <div class="link" [routerLink]="['/listastarefa']" [routerLinkActive]="'active'" style="cursor: pointer;"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp; Listas &nbsp;
+            </div>
+            <i (click)="handleSidebarToggle()" class="fa chevron"></i></div>
     </div>
     <div class="content">
-        <!-- <div class="link">
-            <div class="content" [routerLink]="['/listartarefas/1']" [routerLinkActive]="'active'">
-                <div class="icon">
-                    <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <title>Stockholm-icons / Home / Flower2</title>
-                        <desc>Created with Sketch.</desc>
-                        <defs></defs>
-                        <g id="Stockholm-icons-/-Home-/-Flower2" stroke="none" stroke-width="1" fill="none"
-                            fill-rule="evenodd">
-                            <polygon id="bound" points="0 0 24 0 24 24 0 24"></polygon>
-                            <circle id="Oval-32" fill="#000000" opacity="0.3" cx="15" cy="17" r="5"></circle>
-                            <circle id="Oval-32-Copy" fill="#000000" opacity="0.3" cx="9" cy="17" r="5"></circle>
-                            <circle id="Oval-32-Copy-2" fill="#000000" opacity="0.3" cx="7" cy="11" r="5"></circle>
-                            <circle id="Oval-32-Copy-3" fill="#000000" opacity="0.3" cx="17" cy="11" r="5"></circle>
-                            <circle id="Oval-32-Copy-4" fill="#000000" opacity="0.3" cx="12" cy="7" r="5"></circle>
-                        </g>
-                    </svg>
-                </div>
-                <div class="title">Home</div>
-            </div>
-        </div> -->
-        <div class="link with-children">
-            <div class="content" [routerLink]="['/listastarefa']" [routerLinkActive]="'active'">
-                <div class="icon">
-                    <!-- <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <title>Stockholm-icons / Home / Flower2</title>
-                        <desc>Created with Sketch.</desc>
-                        <defs></defs>
-                        <g id="Stockholm-icons-/-Home-/-Flower2" stroke="none" stroke-width="1" fill="none"
-                            fill-rule="evenodd">
-                            <polygon id="bound" points="0 0 24 0 24 24 0 24"></polygon>
-                            <circle id="Oval-32" fill="#000000" opacity="0.3" cx="15" cy="17" r="5"></circle>
-                            <circle id="Oval-32-Copy" fill="#000000" opacity="0.3" cx="9" cy="17" r="5"></circle>
-                            <circle id="Oval-32-Copy-2" fill="#000000" opacity="0.3" cx="7" cy="11" r="5"></circle>
-                            <circle id="Oval-32-Copy-3" fill="#000000" opacity="0.3" cx="17" cy="11" r="5"></circle>
-                            <circle id="Oval-32-Copy-4" fill="#000000" opacity="0.3" cx="12" cy="7" r="5"></circle>
-                        </g>
-                    </svg> -->
-                    <i class="fa fa-list-ul" aria-hidden="true"></i>
-                </div>
-                <div class="title">Listas</div>
-            </div>
 
+        <div class="link with-children">
             <div class="children">
-                <div class="link" *ngFor="let item of listaTarefas; index as i;">
-                    <div class="content" [routerLink]="['/listartarefas/'+(i+1)]" [routerLinkActive]="'active'">
-                        <div class="icon">
-                            <!-- <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1"
-                                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                <title>Stockholm-icons / Home / Flower2</title>
-                                <desc>Created with Sketch.</desc>
-                                <defs></defs>
-                                <g id="Stockholm-icons-/-Home-/-Flower2" stroke="none" stroke-width="1" fill="none"
-                                    fill-rule="evenodd">
-                                    <polygon id="bound" points="0 0 24 0 24 24 0 24"></polygon>
-                                    <circle id="Oval-32" fill="#000000" opacity="0.3" cx="15" cy="17" r="5"></circle>
-                                    <circle id="Oval-32-Copy" fill="#000000" opacity="0.3" cx="9" cy="17" r="5">
-                                    </circle>
-                                    <circle id="Oval-32-Copy-2" fill="#000000" opacity="0.3" cx="7" cy="11" r="5">
-                                    </circle>
-                                    <circle id="Oval-32-Copy-3" fill="#000000" opacity="0.3" cx="17" cy="11" r="5">
-                                    </circle>
-                                    <circle id="Oval-32-Copy-4" fill="#000000" opacity="0.3" cx="12" cy="7" r="5">
-                                    </circle>
-                                </g>
-                            </svg> -->
+                <div class="link" *ngFor="let item of listaTarefas;">
+                    <div class="content" [routerLink]="['/listartarefas/'+(item.id)]" [routerLinkActive]="'active'">
+                        <div class="icon">                           
                             <i class="fa fa-list-ol" aria-hidden="true"></i>
                         </div>
-                        <div class="title">{{listaTarefas[i]}}</div>
+                        <div class="title">{{item.titulo}}</div>
                     </div>
                 </div>
             </div>

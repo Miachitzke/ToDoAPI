@@ -42,7 +42,7 @@ export class TarefasService {
 
   listarTarefas(idLista: number){
 
-    return this.tarefa.filter(t=> t.idLista === idLista);
+    return this.tarefa.filter(t=> t.idLista === idLista && t.status?.toUpperCase() !== 'CONCLUÍDO');
 
   }
 

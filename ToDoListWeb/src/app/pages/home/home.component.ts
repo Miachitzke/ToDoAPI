@@ -14,7 +14,11 @@ export class HomeComponent {
   constructor(private listaService: ListasService){}
 
   ngOnInit(){
-    this.listas = this.listaService.buscarListas();
+    this.listas = this.listaService.buscarListas(1)!;
   }
 
+  novaLista() {
+    alert("Nova lista");
   }
+
+}

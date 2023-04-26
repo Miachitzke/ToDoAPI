@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IUsuario } from '../interfaces/IUsuario';
+import { AppModule } from '../app.module';
 
 //const ToDoAPI; implementar
 
@@ -10,9 +11,13 @@ import { IUsuario } from '../interfaces/IUsuario';
     providedIn: 'root'
 })
 export class UsuarioService {
+    
 
     constructor(private httpClient: HttpClient,
-        private router: Router) { }
+        private router: Router,
+        private API: AppModule) { }
+
+    private baseUrl = this.API.baseURL;
 
     login(usuario: IUsuario): Observable<any> {
         var retorno: any = [];
@@ -22,7 +27,9 @@ export class UsuarioService {
 
     mostrarMenuEmitter = new EventEmitter<boolean>();
 
-    //TRECHO ABAIXO DEVE SER APAGADO. USADO APENAS PARA TESTE DA TELA
+    novoUsuario(usuario: IUsuario){
+        
+    }
 
     logar(usuario: IUsuario, lembrar: boolean) {
 

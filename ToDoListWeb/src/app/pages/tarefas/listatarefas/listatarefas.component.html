@@ -3,58 +3,48 @@
         <div class="card-hover-shadow-2x mb-3 card">
             <div class="card-header-tab card-header">
                 <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-                        class="fa fa-tasks"></i>&nbsp;Task Lists</div>
+                        class="fa fa-tasks"></i>&nbsp;{{ tituloLista }}</div>
             </div>
             <div class="ps-content">
                 <ul class=" list-group list-group-flush">
-                    <li class="list-group-item " *ngFor="let tarefa of tarefas; trak" (click)="openModal(tarefa)">
-                        <!-- <div class="todo-prioridade "
-                            [ngClass]="{'bg-urgente': tarefa.prioridade === 'Urgente', 'bg-padrao': tarefa.prioridade !== 'Urgente'}">
-                        </div> -->
+                    <li class="btn d-block bg-light" (click)="openModal()" style="cursor: pointer;">
+                        <h6 class="mt-2 " style="cursor: pointer;"><i class="fa fa-plus"></i> Nova Tarefa</h6>
+                    </li>
+                    <li class="list-group-item " *ngFor="let tarefa of tarefas; trak" >
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left mr-2">
                                     <div class="icon">
-                                        <svg width="35px" height="35px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink">
+                                        <svg width="35px" height="35px" viewBox="0 0 24 24">
                                             <title>Concluir</title>
                                             <defs></defs>
-                                            <g class="btn" id="Stockholm-icons-/-Home-/-Flower2" stroke="none" stroke-width="1" fill="none"
+                                            <g class="btn"  (click)="concluirTarefa(tarefa.id!)"  stroke="none" stroke-width="1" fill="none"
                                                 fill-rule="evenodd">
-                                                <polygon id="bound" points="0 0 24 0 24 24 0 24"></polygon>
-                                                <circle id="Oval-32" [ngClass]="{'fill-urgente': tarefa.prioridade === 'Urgente', 'fill-padrao': tarefa.prioridade !== 'Urgente'}" opacity="0.8" cx="12" cy="12" r="7"></circle>
-                                                <circle id="Oval-32-Copy" fill="#000000" opacity="0.3" cx="12" cy="12" r="5"></circle>
+                                                <polygon id="bound" points="0 0 24 0 24 24 0 24" ></polygon>
+                                                <circle class="circulo-maior" [ngClass]="{' fill-urgente': tarefa.prioridade === 'Urgente', ' fill-padrao': tarefa.prioridade !== 'Urgente'}" opacity="0.8" cx="12" cy="12" r="7"></circle>
+                                                <circle class="circulo-menor" opacity="0.3" cx="12" cy="12" r="5"></circle>
                                             </g>
                                         </svg>
                                     </div>
-                                    <!-- <div class="custom-checkbox custom-control">
-                                        <input class="custom-control-input" id="exampleCustomCheckbox12"
-                                            type="checkbox"><label class="custom-control-label"
-                                            for="exampleCustomCheckbox12">&nbsp;</label>
-                                    </div> -->
 
                                 </div>
-                                <div class="widget-content-left">
-                                    <div class="widget-heading">{{tarefa.titulo}}
-                                    </div>
+                                <div class="widget-content-left" style="cursor: pointer;" (click)="openModal(tarefa)">
+                                    <div class="widget-heading">{{tarefa.titulo}}</div>
                                     <div class="widget-subheading"><i>{{tarefa.descricao}}</i></div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <!-- <button class="border-0 btn-transition btn btn-outline-success">
-                                        <i class="fa fa-check"></i></button> -->
-                                    <button class="border-0 btn-transition btn btn-outline-danger">
+                                    <button class="border-0 btn-transition btn btn-outline-danger" (click)="apagarTarefa(tarefa.id!)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    </li>
-                </ul>
+                    </li>                    
+                </ul>                
             </div>
             <div class="d-flex justify-content-between text-right card-footer">
                 <div>
                     <button class="mr-2 btn btn-link btn-sm" [routerLink]="['/listastarefa']"> Voltar </button>
-                    <button type="button" class="btn btn-primary" (click)="openModal()"> Nova Tarefa </button>
                 </div>
                 <span>{{tarefas.length}} tarefas</span>
             </div>
@@ -65,9 +55,8 @@
 <ng-template #modalTarefa let-modal>
     <div class="modal-content">
         <div class="modal-header">
-            <div class="icon" (click)="modal.dismiss()">
-                <svg width="35px" height="35px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink">
+            <div class="icon" (click)="concluirTarefa(tarefaSelecionada!.id!)" >
+                <svg width="35px" height="35px" viewBox="0 0 24 24">
                     <title>Concluir</title>
                     <defs></defs>
                     <g class="btn" id="btnConcluir" stroke="none" stroke-width="1" fill="none"
@@ -122,7 +111,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Confirmar</button>
+            <button *ngIf="!tarefaNova" type="button" class="btn btn-primary" (click)="atualizarTarefa()">Atualizar</button>
+            <button *ngIf="tarefaNova" type="button" class="btn btn-primary" (click)="novaTarefa()">Criar Tarefa</button>
         </div>
     </div>
 </ng-template>

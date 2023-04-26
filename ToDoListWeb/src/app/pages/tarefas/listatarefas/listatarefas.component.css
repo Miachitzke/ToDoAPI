@@ -109,16 +109,16 @@ body {
     transition: opacity .2s;
 }
 
-.bg-urgente {
-    background-color: #f73224 !important;
+circle:hover {
+    fill: #3ac47d;
 }
 
-.bg-padrao {
-    background-color: #295bda;
+.circulo-menor {
+    fill:#000000;
 }
 
 .fill-urgente {
-    fill: #f73224 !important;
+    fill: #f73224 ;
 }
 
 .fill-padrao {

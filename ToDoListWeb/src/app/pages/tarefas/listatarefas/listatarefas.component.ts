@@ -2,6 +2,7 @@ import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core'
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITarefas } from 'src/app/interfaces/ITarefas';
+import { ListasService } from 'src/app/services/listas.services';
 import { TarefasService } from 'src/app/services/tarefas.service';
 
 @Component({
@@ -11,31 +12,50 @@ import { TarefasService } from 'src/app/services/tarefas.service';
 })
 export class ListaTarefasComponent implements OnInit {
   idLista?: number;
+  tituloLista?: string;
   tarefas: ITarefas[] = [];
   tarefaSelecionada: ITarefas|undefined;
   checkbox: any;
   cor: string = '';
+  tarefaNova: boolean = false;
 
   @ViewChild("modalTarefa") modalEditarTarefa: TemplateRef<any> | undefined;
 
-  constructor(private route: ActivatedRoute, private tarefasService: TarefasService, private modalService: NgbModal) { }
+  constructor(private route: ActivatedRoute, 
+              private tarefasService: TarefasService,
+              private listaService: ListasService,
+              private modalService: NgbModal) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.idLista = +params.get('idLista')!;
+      this.tituloLista = this.listaService.tituloLista(this.idLista);
       this.tarefas = this.tarefasService.listarTarefas(this.idLista);
     });
+
+
   }
 
-  ngAfterViewInit(){
-    const elementos = document.querySelectorAll('.click-linha');
+  novaTarefa() {
+    alert("Nova Tarefa");
+  }
 
-    elementos.forEach(elemento => {      
-        elemento.addEventListener('click', () => {
-          this.checkbox = elemento.querySelector('.custom-control-input') as HTMLInputElement;
-          this.checkbox.checked = !this.checkbox.checked;        
-        });      
-    });
+  atualizarTarefa() {
+    alert("Atualizar Tarefa");
+  }
+
+  concluirTarefa(idTarefa: number) {
+
+    if(idTarefa){
+      alert("Tarefa ID: "+ idTarefa +" concluida com sucesso!");
+    }
+    else{
+      alert("A tarefa não pôde ser cancelada! ");
+    }
+  }
+
+  apagarTarefa(idTarefa: number) {
+    alert("Apagar tarefa ID: "+ idTarefa);
   }
 
   openModal(tarefa?: ITarefas) {
@@ -47,7 +67,8 @@ export class ListaTarefasComponent implements OnInit {
     
     if (tarefa) {
         this.tarefaSelecionada = tarefa;
-    
+      this.tarefaNova = false;
+
         console.log(tarefa);
         
         switch (this.tarefaSelecionada.prioridade) {
@@ -66,6 +87,11 @@ export class ListaTarefasComponent implements OnInit {
     
         }
     }
+    else
+    {
+      this.tarefaNova = true;
+    }
+
   }
 
   resize(textarea: HTMLTextAreaElement) {
@@ -87,4 +113,5 @@ export class ListaTarefasComponent implements OnInit {
 
     }
   }
+
 }

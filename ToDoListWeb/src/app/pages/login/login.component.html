@@ -29,7 +29,7 @@
 <ng-template #modalCadastro let-modal>
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title" id="exampleModalLabel">Cadastrar</h5>
+      <h5 class="modal-title">Cadastrar</h5>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
     </div>
     <div class="modal-body">
@@ -38,7 +38,12 @@
         <div class="row h-100 justify-content-center align-items-center">
           <div class="input-group mb-3">
             <span class="input-group-text far fa-circle-user"></span>
-            <input type="text" class="form-control" placeholder="Nome completo">
+            <input type="text" class="form-control" placeholder="Nome completo" required>
+          </div>
+
+          <div class="input-group mb-3">
+            <span class="input-group-text far fa-at"></span>
+            <input type="text" class="form-control" placeholder="Login" required>
           </div>
 
           <div class="input-group mb-3">
@@ -55,7 +60,7 @@
             <input type="password" name="confSenha" class="form-control " placeholder="Confirmar senha" required
               [(ngModel)]="confSenha" (input)="comparaSenha()">
 
-            </div>
+          </div>
           <div *ngIf="!compara" class=" alert alert-danger">Senhas não conferem.</div>
         </div>
       </div>
