@@ -1,6 +1,6 @@
 <div class="container">
   <div class="card card-container">
-    <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+    <img id="profile-img" class="profile-img-card" src="https://atos.net/wp-content/uploads/2022/02/atos-globe-blue-high-res-150x150.png" />
     <p id="profile-name" class="profile-name-card"></p>
 
     <form [formGroup]="formLogin" class="form-signin">
@@ -38,24 +38,23 @@
         <div class="row h-100 justify-content-center align-items-center">
           <div class="input-group mb-3">
             <span class="input-group-text far fa-circle-user"></span>
-            <input type="text" class="form-control" placeholder="Nome completo" required>
+            <input type="text" [(ngModel)]="nomeUsuario" class="form-control" placeholder="Nome completo" required>
           </div>
 
           <div class="input-group mb-3">
             <span class="input-group-text far fa-at"></span>
-            <input type="text" class="form-control" placeholder="Login" required>
+            <input type="text" [(ngModel)]="loginUsuario" class="form-control" placeholder="Login" required>
           </div>
 
           <div class="input-group mb-3">
             <span class="input-group-text far fa-envelope"></span>
-            <input type="email" name="email" class="form-control" placeholder="Email" required
-              pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+            <input type="email" [(ngModel)]="emailUsuario" class="form-control" placeholder="Email" required>
           </div>
 
           <div class="input-group mb-3">
             <span class="input-group-text fa fa-lock"></span>
-            <input type="password" name="senha" class="form-control rounded-end" style="margin-right: 10px;"
-              placeholder="Senha" required [(ngModel)]="senha" (input)="comparaSenha()">
+            <input type="password" class="form-control rounded-end" style="margin-right: 10px;"
+              placeholder="Senha" required [(ngModel)]="senhaUsuario" (input)="comparaSenha()">
             <span class="input-group-text fa fa-lock rounded-start"></span>
             <input type="password" name="confSenha" class="form-control " placeholder="Confirmar senha" required
               [(ngModel)]="confSenha" (input)="comparaSenha()">
@@ -70,7 +69,7 @@
       <a class="link-button" style="cursor: pointer;" (click)="modal.dismiss()">
         Cancelar
       </a>
-      <button type="button" class="btn btn-primary">
+      <button type="button" class="btn btn-primary" (click)="criarUsuario()">
         Confirmar
       </button>
     </div>

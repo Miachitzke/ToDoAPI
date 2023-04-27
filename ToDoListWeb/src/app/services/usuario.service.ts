@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { IUsuario } from '../interfaces/IUsuario';
 import { AppModule } from '../app.module';
+import { Serializer } from '@angular/compiler';
 
 //const ToDoAPI; implementar
 
@@ -27,8 +28,9 @@ export class UsuarioService {
 
     mostrarMenuEmitter = new EventEmitter<boolean>();
 
-    novoUsuario(usuario: IUsuario){
+    novoUsuario(usuario: IUsuario): Observable<IUsuario> {
         
+        return this.httpClient.post<IUsuario>(`${this.baseUrl}/Usuario/Cadastrar`, usuario);
     }
 
     logar(usuario: IUsuario, lembrar: boolean) {

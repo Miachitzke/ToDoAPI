@@ -15,6 +15,13 @@ export class LoginComponent implements OnInit {
     formLogin!: FormGroup;
     lembrar?: boolean = false;
 
+    nomeUsuario?: string;
+    loginUsuario?: string;
+    emailUsuario?: string;
+    senhaUsuario!: string;
+    confSenha!: string;
+
+
     constructor(private formBuilder: FormBuilder,
         private usuarioService: UsuarioService,
         private modalService: NgbModal,
@@ -40,20 +47,45 @@ export class LoginComponent implements OnInit {
 
     }
 
-    openModal(content:any) {
+    openModal(content: any) {
         this.modalService.open(content, { centered: true });
     }
 
-    senha!: string;
-    confSenha!: string;
     compara: boolean = true;
 
     comparaSenha() {
-        if (this.senha === this.confSenha)
+        if (this.senhaUsuario === this.confSenha) {
             this.compara = true;
+        }
         else
             this.compara = false;
+    }
 
+    criarUsuario() {
+        if(this.nomeUsuario && this.loginUsuario && this.emailUsuario && this.compara)
+        {
+            const usuario: IUsuario = {
+                nome: this.nomeUsuario,
+                login: this.loginUsuario,
+                email: this.emailUsuario,
+                senha: this.senhaUsuario
+            } 
+
+            console.log(usuario)
+
+            this.usuarioService.novoUsuario(usuario).subscribe(
+                (response) => {
+                    console.log(response);                    
+                },
+                (error) => {
+                    console.error(error);                    
+                }
+            );
+        }
+        else
+        {
+            alert('erro');
+        }
     }
 }
 

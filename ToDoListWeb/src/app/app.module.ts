@@ -46,5 +46,5 @@ import { SidebarComponent } from './sidebar/sidebar.component';
   bootstrap: [AppComponent]
 })
 export class AppModule {
-  public baseURL = 'https://localhost:7188/';
+  public baseURL = 'https://localhost:7188/api';
 }
