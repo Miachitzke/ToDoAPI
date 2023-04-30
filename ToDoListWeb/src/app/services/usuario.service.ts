@@ -18,7 +18,7 @@ export class UsuarioService {
         private router: Router,
         private API: AppModule) { }
 
-    private baseUrl = this.API.baseURL;
+    private baseUrl = this.API.getBaseUrl();
 
     login(usuario: IUsuario): Observable<any> {
         var retorno: any = [];
