@@ -15,7 +15,7 @@ export class ListaTarefasComponent implements OnInit {
   tituloLista?: string;
   tarefas: ITarefas[] = [];
   tarefaSelecionada: ITarefas = new ITarefas;
-  prazoSelecionado = {day: null, month: null, year: null}
+  prazoSelecionado = {day: 0, month: 0, year: 0};
   checkbox: any;
   cor: string = '';
   tarefaNova: boolean = false;
@@ -78,12 +78,21 @@ export class ListaTarefasComponent implements OnInit {
         classe = 'prazo-importante';
     else if (dataHoje >= dataLimite)
         classe = 'prazo-urgente';
-    if (dataLimite) {
-        console.log(dataLimite);
-        
-    }
 
     return classe;
+  }
+
+  prazoToDate() {
+    if (this.prazoSelecionado != null && this.prazoSelecionado.year != 0) {
+        let novaData = new Date(this.prazoSelecionado.year, this.prazoSelecionado.month, this.prazoSelecionado.day);
+        if (novaData.getDate() > 1)
+            novaData.setDate(novaData.getDate()-1);
+        else
+            novaData.setDate(novaData.getDate()-2);
+        novaData.setMonth(novaData.getMonth()-1);
+        return novaData.toISOString();
+    }
+    return "";
   }
 
   novaTarefa() {
@@ -147,32 +156,35 @@ export class ListaTarefasComponent implements OnInit {
     });
 
     this.tarefaSelecionada = new ITarefas();
+    let temPrazo = false;
     
     if (tarefa) {
       this.tarefaSelecionada = tarefa;
+      if (this.tarefaSelecionada.dataLimite) {
+        let data = new Date(this.tarefaSelecionada.dataLimite!);
+        data.setUTCDate(data.getUTCDate()+1);
+        this.prazoSelecionado = {
+          day : data.getDate(),
+          month : data.getMonth()+1,
+          year : data.getFullYear()
+        }
+        temPrazo = true;
+      }
+
       this.tarefaNova = false;
 
-        console.log(tarefa);
-        
-        // switch (this.tarefaSelecionada.prioridade) {
-        //     case 1: // Urgente
-        //         this.cor = '#e64e4e';
-        //         break;
-        //     case 2: // Importante
-        //         this.cor = '#fac528';
-        //         break;
-        //     case 3: // Normal
-        //         this.cor = '#289bfa';
-        //         break;
-        //     default:
-        //         this.cor = '#787878';
-        //         break;
-    
-        // }
     }
     else
     {
       this.tarefaNova = true;
+    }
+
+    if (!temPrazo) {
+      this.prazoSelecionado = {
+        day : 0,
+        month : 0,
+        year : 0
+      }
     }
 
   }
