@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ToDoAPI.Models;
 using ToDoAPI.Repository.Interfaces;
+using ToDoAPI.Services;
 
 namespace ToDoAPI.Controllers
 {
@@ -14,6 +14,22 @@ namespace ToDoAPI.Controllers
         {
             _usuarioRepository = usuarioRepository;
         }
+
+        [HttpPost("login")]
+        public async Task<ActionResult<string>> Login([FromBody] UsuarioLogin usuario)
+        {
+            var usuarioFiltrado = await _usuarioRepository.BuscaUsuario(usuario.email, usuario.senha);
+
+            if (usuarioFiltrado == null)
+            {
+                return Unauthorized();
+            }
+
+            var token = TokenSvc.GenerateToken(usuarioFiltrado);
+
+            return Ok(token);
+        }
+
 
         [HttpGet]
         public async Task<ActionResult<List<Usuario>>> BuscarTodosUsuarios()

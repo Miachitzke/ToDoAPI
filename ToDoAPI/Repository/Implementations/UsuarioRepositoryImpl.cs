@@ -65,5 +65,9 @@ namespace ToDoAPI.Repository.Implementations
             return true;
         }
 
+        public async Task<Usuario> BuscaUsuario(string email, string senha)
+        {
+            return await _dbContext.Usuario.FirstOrDefaultAsync(u => u.Email == email && u.Senha == senha);
+        }
     }
 }

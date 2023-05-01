@@ -41,6 +41,7 @@ export class LoginComponent implements OnInit {
 
     logar() {
         if (this.formLogin.invalid) return;
+        
         var usuario = this.formLogin.getRawValue() as IUsuario;
         this.usuarioService.logar(usuario, this.lembrar!);
         console.log(usuario);
