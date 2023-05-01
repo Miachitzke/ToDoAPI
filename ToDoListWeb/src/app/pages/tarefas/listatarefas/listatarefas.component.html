@@ -105,7 +105,7 @@
 
                     <div class="col-4 ">
                         <label class="label">Prazo:</label>
-                        <input class="form-control" type="text" name="" id="" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="prazoSelecionado">
+                        <input class="form-control" [ngClass]="getPrazoCssClass(prazoToDate())" type="text" name="" id="" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="prazoSelecionado">
                     </div>
                     
                     <div class="col-4">
