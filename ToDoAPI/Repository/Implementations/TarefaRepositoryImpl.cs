@@ -50,6 +50,23 @@ namespace ToDoAPI.Repository.Implementations
             return tarefaPorId;
         }
 
+        public async Task<Tarefa> Concluir(int id)
+        {
+            Tarefa tarefaPorId = await BuscarPorId(id);
+
+            if (tarefaPorId == null)
+            {
+                throw new Exception($"Tarefa para o ID {id}: não foi encontrado no banco de dados.");
+            }
+            
+            tarefaPorId.Status = Enums.StatusTarefa.Concluido;
+
+            _dbContext.Tarefa.Update(tarefaPorId);
+            await _dbContext.SaveChangesAsync();
+
+            return tarefaPorId;
+        }
+
         public async Task<bool> Deletar(int id)
         {
             Tarefa tarefaPorId = await BuscarPorId(id);

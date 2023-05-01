@@ -109,7 +109,7 @@ body {
     transition: opacity .2s;
 }
 
-circle:hover {
+.btn-concluir:hover circle:nth-of-type(n) {
     fill: #3ac47d;
 }
 
@@ -121,8 +121,24 @@ circle:hover {
     fill: #f73224 ;
 }
 
-.fill-padrao {
+.fill-importante {
+    fill: #fac528;
+}
+
+.fill-normal {
     fill: #295bda;
+}
+
+.fill-padrao {
+    fill: #787878;
+}
+
+.prazo-urgente {
+    color: #f73224 ;
+}
+
+.prazo-importante {
+    color: #fba421;
 }
 
 .widget-content {

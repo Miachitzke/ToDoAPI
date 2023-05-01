@@ -5,6 +5,7 @@
                 <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
                         class="fa fa-tasks"></i>&nbsp;{{ tituloLista }}</div>
             </div>
+            
             <div class="ps-content">
                 <ul class=" list-group list-group-flush">
                     <li class="btn d-block bg-light" (click)="openModal()" style="cursor: pointer;">
@@ -18,10 +19,9 @@
                                         <svg width="35px" height="35px" viewBox="0 0 24 24">
                                             <title>Concluir</title>
                                             <defs></defs>
-                                            <g class="btn"  (click)="concluirTarefa(tarefa.id!)"  stroke="none" stroke-width="1" fill="none"
-                                                fill-rule="evenodd">
+                                            <g class="btn btn-concluir"  (click)="concluirTarefa(tarefa.id!)"  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <polygon id="bound" points="0 0 24 0 24 24 0 24" ></polygon>
-                                                <circle class="circulo-maior" [ngClass]="{' fill-urgente': tarefa.prioridade === 'Urgente', ' fill-padrao': tarefa.prioridade !== 'Urgente'}" opacity="0.8" cx="12" cy="12" r="7"></circle>
+                                                <circle class="circulo-maior" [ngClass]="getPrioridadeCssClass(tarefa.prioridade!)" opacity="0.8" cx="12" cy="12" r="7"></circle>
                                                 <circle class="circulo-menor" opacity="0.3" cx="12" cy="12" r="5"></circle>
                                             </g>
                                         </svg>
@@ -29,11 +29,22 @@
 
                                 </div>
                                 <div class="widget-content-left" style="cursor: pointer;" (click)="openModal(tarefa)">
-                                    <div class="widget-heading">{{tarefa.titulo}}</div>
+                                    <div class="widget-heading" [ngClass]="getPrazoCssClass(tarefa.dataLimite!)">{{tarefa.titulo}}</div>
                                     <div class="widget-subheading"><i>{{tarefa.descricao}}</i></div>
+                                    <div class="widget-subheading mt-2 d-flex">
+                                        <div *ngIf="tarefa.dataLimite" [ngClass]="getPrazoCssClass(tarefa.dataLimite)">
+                                            <i class="fa fa-calendar" aria-hidden="true"></i><i class="p-1">Prazo: {{getPrazo(tarefa.dataLimite).toLocaleDateString("pt-br")}}</i>
+                                        </div>
+                                        <!-- <div style="margin-left: 10px">
+                                            <i class="fa fa-at" aria-hidden="true"></i><i class="p-1">João</i>
+                                        </div> -->
+                                        <div style="margin-left: 10px" *ngIf="tarefa.etiqueta">
+                                            <i class="fa fa-tag" aria-hidden="true"></i><i class="p-1">{{tarefa.etiqueta}}</i>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <button class="border-0 btn-transition btn btn-outline-danger" (click)="apagarTarefa(tarefa.id!)">
+                                    <button class="border-0 btn-transition btn btn-outline-danger" (click)="deletarTarefa(tarefa.id!)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
@@ -59,15 +70,14 @@
                 <svg width="35px" height="35px" viewBox="0 0 24 24">
                     <title>Concluir</title>
                     <defs></defs>
-                    <g class="btn" id="btnConcluir" stroke="none" stroke-width="1" fill="none"
-                        fill-rule="evenodd">
+                    <g class="btn btn-concluir" id="btnConcluir" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <polygon id="bound" points="0 0 24 0 24 24 0 24"></polygon>
-                        <circle id="Oval-32" [ngStyle]="{fill: cor}" opacity="0.8" cx="12" cy="12" r="7"></circle>
+                        <circle id="Oval-32" [ngClass]="getPrioridadeCssClass(tarefaSelecionada.prioridade!)" opacity="0.8" cx="12" cy="12" r="7"></circle>
                         <circle id="Oval-32-Copy" fill="#000000" opacity="0.3" cx="12" cy="12" r="5"></circle>
                     </g>
                 </svg>
             </div>
-            <textarea #txtTitulo class="form-control input-titulo-tarefa no-resize no-overflow" rows=1 maxlength="500" *ngIf="tarefaSelecionada" [ngModel]="tarefaSelecionada.titulo" (ngModelChange)="resize(txtTitulo)"></textarea>
+            <textarea #txtTitulo class="form-control input-titulo-tarefa no-resize no-overflow" rows=1 maxlength="500" placeholder="Título" [(ngModel)]="tarefaSelecionada.titulo" (ngModelChange)="resize(txtTitulo)"></textarea>
             <button type="button" class="btn btn-close" (click)="modal.dismiss()"></button>
         </div>
 
@@ -76,7 +86,7 @@
                 <div class="row">
                     <label for="textarea" class="col-sm-2 control-label">Descrição:</label>
                     <div class="col-12">
-                        <textarea name="" id="textarea" class="form-control no-resize" rows="4" *ngIf="tarefaSelecionada" [ngModel]="tarefaSelecionada.descricao"></textarea>
+                        <textarea name="" id="textarea" class="form-control no-resize" rows="4" [(ngModel)]="tarefaSelecionada.descricao"></textarea>
                     </div>
                 </div>
 
@@ -85,34 +95,34 @@
                 <div class="row">
                     <div class="col-4 ">
                         <label class="label">Prioridade:</label>
-                        <select class="form-control" type="text" *ngIf="tarefaSelecionada" [ngModel]="tarefaSelecionada.prioridade">
-                            <option value="">🔴 Urgente</option>
-                            <option value="">🟡 Importante</option>
-                            <option value="">🔵 Normal</option>
-                            <option value="">⚫ Ocasional</option>
+                        <select class="form-control" type="text" [(ngModel)]="tarefaSelecionada.prioridade">
+                            <option value="1">🔴 Urgente</option>
+                            <option value="2">🟡 Importante</option>
+                            <option value="3">🔵 Normal</option>
+                            <option value="4">⚫ Ocasional</option>
                         </select>
                     </div>
 
                     <div class="col-4 ">
                         <label class="label">Prazo:</label>
-                        <input class="form-control" type="text" name="" id="" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()">
+                        <input class="form-control" type="text" name="" id="" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" [(ngModel)]="prazoSelecionado">
                     </div>
                     
                     <div class="col-4">
                         <label class="label">Etiqueta:</label>
-                        <select class="form-control" type="text" *ngIf="tarefaSelecionada" [ngModel]="tarefaSelecionada.status">
+                        <select class="form-control" type="text">
                             <option value=""></option>
-                            <option value="">💰Pagamento</option>
-                            <option value="">👉Delegar</option>
-                            <option value="">🔀Opcional</option>
+                            <option value="pagamento">💰Pagamento</option>
+                            <option value="delegar">👉Delegar</option>
+                            <option value="opcional">🔀Opcional</option>
                         </select>
                     </div>
                 </div>
             </div>
         </div>
         <div class="modal-footer">
-            <button *ngIf="!tarefaNova" type="button" class="btn btn-primary" (click)="atualizarTarefa()">Atualizar</button>
-            <button *ngIf="tarefaNova" type="button" class="btn btn-primary" (click)="novaTarefa()">Criar Tarefa</button>
+            <button *ngIf="!tarefaNova" type="button" class="btn btn-primary" (click)="atualizarTarefa(); modal.dismiss();">Atualizar</button>
+            <button *ngIf="tarefaNova" type="button" class="btn btn-primary" (click)="novaTarefa(); modal.dismiss();">Criar Tarefa</button>
         </div>
     </div>
 </ng-template>

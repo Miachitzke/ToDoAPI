@@ -17,7 +17,7 @@ export class UsuarioService {
         private router: Router,
         private API: AppModule) { }
 
-    private baseUrl = this.API.baseURL;
+    private baseUrl = this.API.getBaseUrl();
 
     mostrarMenuEmitter = new EventEmitter<boolean>();
     

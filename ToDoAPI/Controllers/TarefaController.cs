@@ -29,8 +29,8 @@ namespace ToDoAPI.Controllers
             return Ok(tarefa);
         }
 
-        [HttpPost("Cadastar")]
-        public async Task<ActionResult<Tarefa>> Cadastrar([FromBody] Tarefa tarefaACadastrar)
+        [HttpPost("Cadastrar")]
+        public async Task<ActionResult<Tarefa>> Cadastrar(Tarefa tarefaACadastrar)
         {
             Tarefa tarefa = await _tarefaRepository.Adicionar(tarefaACadastrar);
             return Ok(tarefa);
@@ -41,6 +41,13 @@ namespace ToDoAPI.Controllers
         {
             tarefaAtualizada.ID = id;
             Tarefa tarefa = await _tarefaRepository.Atualizar(tarefaAtualizada, id);
+            return Ok(tarefa);
+        }
+
+        [HttpPost("Concluir/{id}")]
+        public async Task<ActionResult<Tarefa>> Concluir(int id)
+        {
+            Tarefa tarefa = await _tarefaRepository.Concluir(id);
             return Ok(tarefa);
         }
 
