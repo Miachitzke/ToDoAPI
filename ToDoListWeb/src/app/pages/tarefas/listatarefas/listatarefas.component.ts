@@ -35,9 +35,17 @@ export class ListaTarefasComponent implements OnInit {
   }
 
   listarTarefas() {
+    this.tarefas = [];
+
     if (this.idLista) {
         this.tituloLista = this.listaService.tituloLista(this.idLista);
-        this.tarefas = this.tarefasService.listarTarefas(this.idLista);
+
+        this.tarefasService.listarTarefas(this.idLista).subscribe(response => {
+    
+          if(response)
+          this.tarefas.push(...response)
+        
+        });
     }
   }
 

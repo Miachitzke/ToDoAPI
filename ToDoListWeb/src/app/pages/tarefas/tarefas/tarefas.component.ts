@@ -15,9 +15,16 @@ export class TarefasComponent implements OnInit{
   constructor(private rota: ActivatedRoute, private tarefasService: TarefasService){}
 
   ngOnInit(): void {
+    this.tarefas = [];
+    
     this.rota.paramMap.subscribe(params => {
       this.idLista = +params.get('idLista')!;
-      this.tarefas = this.tarefasService.listarTarefas(this.idLista);
+      this.tarefasService.listarTarefas(this.idLista).subscribe(response => {
+    
+        if(response)
+        this.tarefas.push(...response)
+      
+      });
     });
   }
 }

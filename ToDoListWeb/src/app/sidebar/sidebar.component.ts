@@ -14,16 +14,18 @@ export class SidebarComponent {
 
   idLista?: number;
 
-  listaTarefas?: Listas[] = [];
+  listaTarefas: Listas[] = [];
 
   constructor(private route: ActivatedRoute,
     private listaService: ListasService) { }
 
     ngOnInit() {
-      this.listaService.buscarListas(1)!.subscribe(
-        (list: Listas[]) => this.listaTarefas = list,
-        (error: any) => console.log(error)
-      );
+      this.listaService.buscarListas(1).subscribe(response => {
+      
+        if(response)
+        this.listaTarefas.push(...response)
+      
+      });
     }    
 
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);

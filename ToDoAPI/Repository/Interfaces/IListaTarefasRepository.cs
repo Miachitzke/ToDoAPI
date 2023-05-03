@@ -6,7 +6,7 @@ namespace ToDoAPI.Repository.Interfaces
     {
         Task<List<ListaTarefas>> BuscarTodasListaTarefas();
         Task<ListaTarefas> BuscarPorId(int id);
-        Task<ListaTarefas> BuscarPorIdUsuario(int idUsuario);
+        Task<List<ListaTarefas>> BuscarPorIdUsuario(int idUsuario);
         Task<ListaTarefas> Adicionar(ListaTarefas listaTarefas);
         Task<ListaTarefas> Atualizar(ListaTarefas listaTarefas, int id);
         Task<bool> Deletar(int id);

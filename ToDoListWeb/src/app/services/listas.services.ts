@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Listas } from '../interfaces/IListas';
 import { AppModule } from '../app.module';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'

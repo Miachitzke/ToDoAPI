@@ -30,9 +30,9 @@ namespace ToDoAPI.Controllers
         }
 
         [HttpGet("BuscarPorIdUsuario/{idUsuario}")]
-        public async Task<ActionResult<ListaTarefas>> BuscarPorIdUsuario(int idUsuario)
+        public async Task<ActionResult<List<ListaTarefas>>> BuscarPorIdUsuario(int idUsuario)
         {
-            ListaTarefas listaTarefas = await _listaTarefasRepository.BuscarPorIdUsuario(idUsuario);
+            List<ListaTarefas> listaTarefas = await _listaTarefasRepository.BuscarPorIdUsuario(idUsuario);
             return Ok(listaTarefas);
         }
 
