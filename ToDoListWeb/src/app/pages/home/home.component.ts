@@ -13,9 +13,16 @@ export class HomeComponent {
   
   constructor(private listaService: ListasService){}
 
-  ngOnInit(){
-    this.listas = this.listaService.buscarListas(1)!;
+  ngOnInit() {
+    this.listaService.buscarListas(1).subscribe(response => {
+    
+      if(response)
+      this.listas.push(...response)
+    
+    });
   }
+  
+  
 
   novaLista() {
     alert("Nova lista");

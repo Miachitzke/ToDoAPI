@@ -40,7 +40,7 @@ export class TarefasService {
     { id:30 , titulo: 'Implementação de novo sistema de autenticação', descricao: 'Implementar novo sistema de autenticação para tornar o acesso ao sistema mais seguro e prático para os usuários', prioridade: 1, status: 'Em Andamento', idLista:3 }
   ];
 
-  constructor(private http: HttpClient, private app: AppModule) { }
+  constructor(private http: HttpClient, private API: AppModule) { }
 
   listarTarefas(idLista: number) {
 
@@ -49,7 +49,7 @@ export class TarefasService {
   }
 
   criarNovaTarefa(tarefa: ITarefas) {
-    const url = this.app.getBaseUrl() + '/Tarefa/Cadastrar';
+    const url = this.API.getBaseUrl() + '/Tarefa/Cadastrar';
     let code = '';
     try {
         this.http.post(url, tarefa).subscribe(response => {
@@ -65,7 +65,7 @@ export class TarefasService {
   }
   
   atualizarTarefa(tarefa: ITarefas) {
-    const url = this.app.getBaseUrl() + '/Tarefa/' + tarefa.id;
+    const url = this.API.getBaseUrl() + '/Tarefa/' + tarefa.id;
     let code = '';
     try {
         this.http.put(url, tarefa).subscribe(response => {
@@ -81,7 +81,7 @@ export class TarefasService {
   }
   
   deletarTarefa(id: number) {
-    const url = this.app.getBaseUrl() + '/Tarefa/' + id;
+    const url = this.API.getBaseUrl() + '/Tarefa/' + id;
     let code = '';
     try {
         this.http.delete(url).subscribe(response => {
@@ -97,7 +97,7 @@ export class TarefasService {
   }
 
   concluirTarefa(id: number) {
-    const url = this.app.getBaseUrl() + '/Tarefa/Concluir/' + id;
+    const url = this.API.getBaseUrl() + '/Tarefa/Concluir/' + id;
     let code = '';
     try {
         this.http.post(url, id).subscribe(response => {

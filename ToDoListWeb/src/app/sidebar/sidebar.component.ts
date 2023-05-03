@@ -19,10 +19,12 @@ export class SidebarComponent {
   constructor(private route: ActivatedRoute,
     private listaService: ListasService) { }
 
-  ngOnInit() {
-    this.listaTarefas = this.listaService.buscarListas(1)!;
-    
-  }
+    ngOnInit() {
+      this.listaService.buscarListas(1)!.subscribe(
+        (list: Listas[]) => this.listaTarefas = list,
+        (error: any) => console.log(error)
+      );
+    }    
 
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
 

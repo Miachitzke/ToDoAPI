@@ -1,6 +1,7 @@
 export class Listas {
-    id?: number;
-    titulo?: string;
-    dataCriacao?: string;
-    idUsuario?: number;
+    id!: number;
+    nomeLista!: string;
+    idUsuario!: number;
+
+    tarefas?: any;
 }

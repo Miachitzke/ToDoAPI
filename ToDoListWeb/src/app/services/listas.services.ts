@@ -1,29 +1,35 @@
 import { Injectable } from '@angular/core';
 import { Listas } from '../interfaces/IListas';
+import { AppModule } from '../app.module';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map } from 'rxjs';
 
 @Injectable({
-providedIn: 'root'
+    providedIn: 'root'
 })
 export class ListasService {
-listas: Listas[] = [
-    { id:1 , titulo: 'Lista de tarefas 1', dataCriacao: '2023-04-14', idUsuario: 1},
-    { id:2 , titulo: 'Lista de tarefas 2', dataCriacao: '2023-04-14', idUsuario: 1},
-    { id:3 , titulo: 'Lista de tarefas 3', dataCriacao: '2023-04-14', idUsuario: 1},
-];
+    listas: Listas[] = [
+        /* { id: 1, nomeLista: 'Nova Lista', idUsuario: 1 } */
+    ];
 
-constructor() { }
+    constructor(private http: HttpClient,
+        private API: AppModule) { }
 
-buscarListas(idUsuario: number){
+    private baseUrl = this.API.getBaseUrl();
 
-    return this.listas.filter( lista=> lista.idUsuario === idUsuario)!;
-}
-
-tituloLista(idLista: number): any {
-    const listaFiltrada = this.listas.find( lt => lt.id === idLista);
-    var ttl = listaFiltrada ? listaFiltrada.titulo : '';
+    buscarListas(idUsuario: number): Observable<Listas[]> {
+        const url = `${this.baseUrl}/ListaTarefas/BuscarPorIdUsuario/${idUsuario}`;
+        return this.http.get<Listas[]>(url);
+    }
     
-    return ttl;
-}
+    
+
+    tituloLista(idLista: number): any {
+        const listaFiltrada = this.listas.find(lt => lt.id === idLista);
+        var ttl = listaFiltrada ? listaFiltrada.nomeLista : '';
+
+        return ttl;
+    }
 
 
 

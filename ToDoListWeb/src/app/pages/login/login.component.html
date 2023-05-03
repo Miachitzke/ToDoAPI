@@ -1,6 +1,7 @@
 <div class="container">
   <div class="card card-container">
-    <img id="profile-img" class="profile-img-card" src="https://atos.net/wp-content/uploads/2022/02/atos-globe-blue-high-res-150x150.png" />
+    <img id="profile-img" class="profile-img-card"
+      src="https://atos.net/wp-content/uploads/2022/02/atos-globe-blue-high-res-150x150.png" />
     <p id="profile-name" class="profile-name-card"></p>
 
     <form [formGroup]="formLogin" class="form-signin">
@@ -53,8 +54,8 @@
 
           <div class="input-group mb-3">
             <span class="input-group-text fa fa-lock"></span>
-            <input type="password" class="form-control rounded-end" style="margin-right: 10px;"
-              placeholder="Senha" required [(ngModel)]="senhaUsuario" (input)="comparaSenha()">
+            <input type="password" class="form-control rounded-end" style="margin-right: 10px;" placeholder="Senha"
+              required [(ngModel)]="senhaUsuario" (input)="comparaSenha()">
             <span class="input-group-text fa fa-lock rounded-start"></span>
             <input type="password" name="confSenha" class="form-control " placeholder="Confirmar senha" required
               [(ngModel)]="confSenha" (input)="comparaSenha()">

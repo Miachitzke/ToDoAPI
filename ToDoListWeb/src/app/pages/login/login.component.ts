@@ -44,8 +44,6 @@ export class LoginComponent implements OnInit {
         
         var usuario = this.formLogin.getRawValue() as IUsuario;
         this.usuarioService.logar(usuario, this.lembrar!);
-        console.log(usuario);
-
     }
 
     openModal(content: any) {
@@ -70,9 +68,7 @@ export class LoginComponent implements OnInit {
                 login: this.loginUsuario,
                 email: this.emailUsuario,
                 senha: this.senhaUsuario
-            } 
-
-            console.log(usuario)
+            }
 
             this.usuarioService.novoUsuario(usuario).subscribe(
                 (response) => {

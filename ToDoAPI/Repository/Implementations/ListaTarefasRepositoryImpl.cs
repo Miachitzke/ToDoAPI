@@ -18,6 +18,11 @@ namespace ToDoAPI.Repository.Implementations
             return await _dbContext.ListaTarefas.FirstOrDefaultAsync(x => x.ID == id);
         }
 
+        public async Task<ListaTarefas> BuscarPorIdUsuario(int idUsuario)
+        {
+            return await _dbContext.ListaTarefas.FirstOrDefaultAsync(x => x.UsuarioID == idUsuario);
+        }
+
         public async Task<List<ListaTarefas>> BuscarTodasListaTarefas()
         {
             return await _dbContext.ListaTarefas.ToListAsync();

@@ -5,10 +5,10 @@ namespace ToDoAPI.Enums
     public enum StatusTarefa
     {
         [Description("A fazer")]
-        AFazer = 1,
+        AFazer = 0,
         [Description("Em andamento")]
-        EmAndamento = 2,
+        EmAndamento = 1,
         [Description("Concluído")]
-        Concluido = 3
+        Concluido = 2
     }
 }
