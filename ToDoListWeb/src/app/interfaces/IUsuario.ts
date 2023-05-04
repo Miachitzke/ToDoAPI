@@ -4,5 +4,5 @@ export interface IUsuario
     login: string,
     nome: string,
     email: string,
-    senha: string
+    senha?: string
 }

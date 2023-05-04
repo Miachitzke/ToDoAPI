@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ITarefas } from 'src/app/interfaces/ITarefas';
@@ -32,6 +32,10 @@ export class ListaTarefasComponent implements OnInit {
       this.idLista = +params.get('idLista')!;
       this.listarTarefas();
     });
+  }
+
+  ngOnChanges() {
+    this.listarTarefas();
   }
 
   listarTarefas() {

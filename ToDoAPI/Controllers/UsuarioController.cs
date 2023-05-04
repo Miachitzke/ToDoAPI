@@ -16,7 +16,7 @@ namespace ToDoAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<string>> Login([FromBody] UsuarioLogin usuario)
+        public async Task<ActionResult<dynamic>> Login([FromBody] UsuarioLogin usuario)
         {
             try
             {

@@ -8,9 +8,7 @@ import { Observable } from 'rxjs';
     providedIn: 'root'
 })
 export class ListasService {
-    listas: Listas[] = [
-        /* { id: 1, nomeLista: 'Nova Lista', idUsuario: 1 } */
-    ];
+    listas: Listas[] = [];
 
     constructor(private http: HttpClient,
         private API: AppModule) { }

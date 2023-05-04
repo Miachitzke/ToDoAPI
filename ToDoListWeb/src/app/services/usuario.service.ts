@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { IUsuario } from '../interfaces/IUsuario';
 import { AppModule } from '../app.module';
-import { Serializer } from '@angular/compiler';
-
 
 @Injectable({
     providedIn: 'root'
@@ -34,10 +32,7 @@ export class UsuarioService {
         this.login(usuario).subscribe(
             (token: string) => {
                 
-                localStorage.setItem('usuario', usuario.toString());
                 localStorage.setItem('token', token);
-                
-                console.log(usuario, token);
 
                 this.mostrarMenuEmitter.emit(true);
                 this.router.navigate(['listastarefa']);
@@ -51,12 +46,9 @@ export class UsuarioService {
     }
     
     deslogar() {
+        
         localStorage.clear();
         this.router.navigate(['login']);
-    }
-
-    get logado(): boolean {
-        return localStorage.getItem('token') ? true : false;
     }
 
 }

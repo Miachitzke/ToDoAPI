@@ -7,13 +7,14 @@ import { TarefasComponent } from './pages/tarefas/tarefas/tarefas.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ModaltarefasComponent } from './pages/tarefas/acaotarefas/modaltarefas.component';
 import { AcaoUsuarioComponent } from './pages/usuarios/acaousuario.component';
+import { UsuarioAutenticadoGuard } from './services/guards/usuario-autenticado.guard';
 
 const routes: Routes = [
   {
   path: 'login', component: LoginComponent
   },
   {
-    path: 'listastarefa' , component: HomeComponent   
+    path: 'listastarefa' , component: HomeComponent, canActivate: [UsuarioAutenticadoGuard]   
   },
   {
     path: 'novalista',component: ListaTarefasComponent,

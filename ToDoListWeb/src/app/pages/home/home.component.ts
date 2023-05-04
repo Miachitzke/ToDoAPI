@@ -2,6 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { Listas } from 'src/app/interfaces/IListas';
 import { RouterModule } from '@angular/router';
 import { ListasService } from 'src/app/services/listas.services';
+import { UsuarioAutenticadoGuard } from 'src/app/services/guards/usuario-autenticado.guard';
 
 @Component({
   selector: 'app-home',
@@ -11,10 +12,13 @@ import { ListasService } from 'src/app/services/listas.services';
 export class HomeComponent {
   listas: Listas[] = [];
   
-  constructor(private listaService: ListasService){}
+  constructor(private listaService: ListasService, private autenticado: UsuarioAutenticadoGuard){}
 
   ngOnInit() {
-    this.listaService.buscarListas(1).subscribe(response => {
+    const idUsuario = JSON.parse(localStorage.getItem('usuario')!).id;
+
+
+    this.listaService.buscarListas(idUsuario).subscribe(response => {
     
       if(response)
       this.listas.push(...response)
