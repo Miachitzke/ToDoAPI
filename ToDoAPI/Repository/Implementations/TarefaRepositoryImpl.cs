@@ -24,6 +24,11 @@ namespace ToDoAPI.Repository.Implementations
             return await _dbContext.Tarefa.ToListAsync();
         }
 
+        public async Task<List<Tarefa>> BuscarPorIdLista(int idLista)
+        {
+            return await _dbContext.Tarefa.Where(x => x.ListaTarefaID == idLista).ToListAsync();
+        }
+
         public async Task<Tarefa> Adicionar(Tarefa tarefa)
         {
             await _dbContext.Tarefa.AddAsync(tarefa);
@@ -80,5 +85,6 @@ namespace ToDoAPI.Repository.Implementations
             await _dbContext.SaveChangesAsync();
             return true;
         }
+
     }
 }

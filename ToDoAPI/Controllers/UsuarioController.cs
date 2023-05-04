@@ -18,17 +18,25 @@ namespace ToDoAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<string>> Login([FromBody] UsuarioLogin usuario)
         {
-            var usuarioFiltrado = await _usuarioRepository.BuscaUsuario(usuario.email, usuario.senha);
-
-            if (usuarioFiltrado == null)
+            try
             {
-                return Unauthorized();
+                var usuarioFiltrado = await _usuarioRepository.BuscaUsuario(usuario.email, usuario.senha);
+
+                if (usuarioFiltrado == null)
+                {
+                    return Unauthorized();
+                }
+
+                var token = TokenSvc.GenerateToken(usuarioFiltrado);
+
+                return Ok(token);
             }
-
-            var token = TokenSvc.GenerateToken(usuarioFiltrado);
-
-            return Ok(token);
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro: {ex.Message}");
+            }
         }
+
 
 
         [HttpGet]

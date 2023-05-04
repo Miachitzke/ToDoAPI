@@ -1,8 +1,0 @@
-.content {
-    margin-left: 100px;
-    transition: 0.3s;
-}
-
-.content.sidebarExpanded {
-    margin-left: 10px;
-}

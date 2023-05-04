@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoListMobile.Views.TarefaAdd"
+             Title="TarefaAdd">
+    <VerticalStackLayout>
+        <Label x:Name="LabelError" Margin="30,0" IsVisible="false" TextColor="Red">
+            
+        </Label>
+        <Entry
+            x:Name="EntryTitulo"
+            Margin="15,0"
+            Placeholder="Título"
+        />
+        <Entry  
+            x:Name="EntryDescricao"
+            Margin="15,0"
+            Placeholder="Descricao"
+        />
+        <Picker x:Name="PickerPrioridade" Title="Prioridade" SelectedIndex="0">
+            <Picker.Items>
+                <x:String>Ocasional</x:String>
+                <x:String>Normal</x:String>
+                <x:String>Importante</x:String>
+                <x:String>Urgente</x:String>
+            </Picker.Items>
+        </Picker>
+
+        <Picker x:Name="PickerStatus" Title="Status" SelectedIndex="0">
+            <Picker.Items>
+                <x:String>A fazer</x:String>
+                <x:String>Em andamento</x:String>
+                <x:String>Concluído</x:String>
+            </Picker.Items>
+        </Picker>
+        <DatePicker 
+                x:Name="DatePickerDate"
+                FontSize="12.0"
+                Margin="15,0"
+                TextColor="Red" 
+                BackgroundColor="LightGray" 
+                MinimumDate="2023-01-01"
+                MaximumDate="2023-12-31"
+                Format="DD/MM/YY"   
+                />
+
+        <TimePicker  
+                x:Name="TimePickerTime"
+                FontSize="12.0"
+                Margin="15,0"
+                TextColor="black"
+                
+                />
+        <Button 
+            Margin="15,0"
+            Text="Criar"  
+            TextColor="#70e966"
+            BorderColor="black"
+            BorderWidth="2.5"
+            HorizontalOptions="Center"
+            Clicked="Criar" 
+        ></Button>
+    </VerticalStackLayout>
+</ContentPage>

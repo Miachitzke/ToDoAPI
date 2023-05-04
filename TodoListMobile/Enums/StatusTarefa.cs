@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace ToDoAPI.Enums
+namespace TodoListMobile.Enums
 {
     public enum StatusTarefa
     {
