@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoListMobile.Views.ListaTarefasEdit"
+             Title="ListaTarefasEdit">
+    <VerticalStackLayout BackgroundColor="White">
+        <Border Background="black" Padding="15" Margin="10" StrokeShape="RoundRectangle 15">
+            <Grid RowDefinitions="Auto" ColumnDefinitions="*">
+                <Entry 
+                Placeholder="Nomear Seção"
+                Grid.Row="0"
+                Grid.Column="0"
+                TextColor="White"/>
+            </Grid>
+        </Border>
+        <Button 
+            Clicked="Editar"
+            Margin="15,0"
+            Text="Editar"  
+            TextColor="#70e966"
+            BorderColor="black"
+            BorderWidth="2.5"
+            HorizontalOptions="Center"
+        ></Button>
+    </VerticalStackLayout>
+</ContentPage>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoListMobile.Views.Login"
+             Title="Login"
+             NavigationPage.HasNavigationBar="False">
+    <VerticalStackLayout>
+        <StackLayout Padding="20">
+            <Label Text="Login" FontSize="Large" TextColor="Black" HorizontalOptions="CenterAndExpand"  />
+            <Entry Placeholder="Username" Text="{Binding Username}" HorizontalOptions="FillAndExpand" CharacterSpacing="1" />
+            <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" HorizontalOptions="FillAndExpand" CharacterSpacing="1"/>
+            <Button Clicked="Logar" Text="Login" Command="{Binding LoginCommand}" HorizontalOptions="FillAndExpand" />
+            
+        </StackLayout>
+    </VerticalStackLayout>
+ 
+</ContentPage>
