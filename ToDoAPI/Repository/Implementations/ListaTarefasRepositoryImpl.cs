@@ -32,6 +32,7 @@ namespace ToDoAPI.Repository.Implementations
         {
             await _dbContext.ListaTarefas.AddAsync(listaTarefas);
             await _dbContext.SaveChangesAsync();
+
             return listaTarefas;
         }
 

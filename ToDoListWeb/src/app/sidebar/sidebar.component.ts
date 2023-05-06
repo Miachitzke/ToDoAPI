@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output, NgModule } from "@angular/core"
 import { ActivatedRoute } from "@angular/router";
 import { ListasService } from "../services/listas.services";
 import { Listas } from "../interfaces/IListas";
+import { UsuarioAutenticadoGuard } from "../services/guards/usuario-autenticado.guard";
 
 @Component({
   selector: "my-sidebar",
@@ -14,19 +15,29 @@ export class SidebarComponent {
 
   idLista?: number;
 
-  listaTarefas: Listas[] = [];
+  listaTarefas: Listas[] | undefined;
 
   constructor(private route: ActivatedRoute,
-    private listaService: ListasService) { }
+    private listaService: ListasService,
+    private auth: UsuarioAutenticadoGuard) { }
 
-    ngOnInit() {
-      this.listaService.buscarListas(1).subscribe(response => {
-      
-        if(response)
-        this.listaTarefas.push(...response)
-      
-      });
-    }    
+  ngOnInit() {
+    this.atualizarListas();
+
+    setInterval(() => {
+      this.atualizarListas();
+    }, 500);
+  }
+  
+
+  atualizarListas() {
+    const user = this.auth.usuario;
+
+    this.listaService.buscarListas(user.id!).subscribe(response => {
+      if (response)
+        this.listaTarefas = response;
+    });
+  }
 
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
 

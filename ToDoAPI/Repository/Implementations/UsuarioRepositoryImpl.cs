@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Security.Cryptography;
+using System.Text;
 using ToDoAPI.Data;
 using ToDoAPI.Models;
 using ToDoAPI.Repository.Interfaces;
@@ -26,6 +28,7 @@ namespace ToDoAPI.Repository.Implementations
 
         public async Task<Usuario> Adicionar(Usuario usuario)
         {
+
             await _dbContext.AddAsync(usuario);
             await _dbContext.SaveChangesAsync();
 

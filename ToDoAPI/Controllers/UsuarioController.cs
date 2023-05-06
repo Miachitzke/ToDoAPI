@@ -37,8 +37,6 @@ namespace ToDoAPI.Controllers
             }
         }
 
-
-
         [HttpGet]
         public async Task<ActionResult<List<Usuario>>> BuscarTodosUsuarios()
         {

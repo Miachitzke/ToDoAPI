@@ -1,28 +1,47 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-12">
-            <div class="d-flex justify-content-between align-items-center activity">
-                <div><span class="activity-done">Listas de Tarefa</span></div>
-                <div class="icons"><i class="fa fa-search"></i><i class="fa fa-ellipsis-h"></i></div>
+            <div class="controle-search">
+                <div id="titulo">
+                    <span class="activity-done">Listas de Tarefa</span>
+                </div>
+                <div id="filtro-lista">
+                    <input type="text" class="form-control " placeholder="Buscar Lista">
+                </div>
+                <div id="btn-listas">
+                    <i class="fa fa-search fa-lg"></i>
+                    <i class="fa fa-filter fa-lg"></i>
+                </div>
             </div>
             <div class="mt-3">
                 <ul class="list list-inline">
-                    <li class="btn d-block bg-light" (click)="novaLista()" style="cursor: pointer;">
-                        <h6 class="mt-1 " style="cursor: pointer;"><i class="fa fa-plus"></i> Nova Lista</h6>
+                    <li class="btn d-block bg-light" style="cursor: pointer;">
+                        <h6 *ngIf="!nvList" class="mt-1 " style="cursor: pointer;" (click)="nvList = !nvList"><i
+                                class="fa fa-plus"></i> Nova Lista</h6>
+                        <div *ngIf="nvList" class="input-group" (keydown.escape)="nvList = !nvList">
+                            <input type="text" class="form-control" placeholder="Nome da Lista"
+                                [(ngModel)]="tituloListaNova" autofocus (ngBlur)="nvList = !nvList"
+                                (keydown.escape)="nvList = !nvList">
+                            <button type="button" class="btn btn-outline-secondary" (click)="novaLista()">
+                                <i style="color: #35d03f;" class="fa fa-check"></i>
+                            </button>
+                        </div>
                     </li>
                     <li *ngFor="let item of listas!">
                         <div class="d-flex justify-content-between">
-                            <div class="d-flex flex-row align-items-center"><i class="fa fa-check-circle checkicon"> </i>
-                            <div class="ml-2">
-                                <h6 class="mb-0"><a class="linkTarefas" [routerLink]="['/listartarefas/',item.id]" >{{ item.nomeLista }}</a></h6>
-                                <div class="d-flex flex-row mt-1 text-black-50 date-time">
+                            <div class="d-flex flex-row align-items-center"><i class="fa fa-check-circle checkicon">
+                                </i>
+                                <div class="ml-2">
+                                    <h6 class="mb-0"><a class="linkTarefas"
+                                            [routerLink]="['/listartarefas/',item.id]">{{ item.nomeLista }}</a></h6>
+                                    <div class="d-flex flex-row mt-1 text-black-50 date-time">
+                                    </div>
                                 </div>
                             </div>
-                            </div>
                             <div class="d-flex flex-row align-items-center">
-                            <div class="d-flex flex-column mr-2">
-                            </div>
-                            <i class="fa fa-ellipsis-h"></i>
+                                <div class="d-flex flex-column mr-2">
+                                </div>
+                                <i class="fa fa-ellipsis-h"></i>
                             </div>
                         </div>
                     </li>

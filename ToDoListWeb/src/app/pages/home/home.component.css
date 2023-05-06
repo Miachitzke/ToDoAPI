@@ -6,6 +6,32 @@ i {
     padding: 4px;
 }
 
+.controle-search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    column-gap: 5px;
+    /* align-items: center; */
+    /* justify-content: space-between; */
+}
+
+#titulo {
+    align-content: start;
+    justify-content: center;
+}
+
+#filtro-lista {
+    justify-content: stretch;
+    align-content: stretch;
+    width: 80%;
+}
+
+#btn-listas {
+    align-content: end;
+    justify-content: end;
+}
+
 .icons i {
     color: #b5b3b3;
     border: 1px solid #b5b3b3;

@@ -39,7 +39,13 @@ namespace ToDoAPI.Controllers
         [HttpPost("Cadastrar")]
         public async Task<ActionResult<ListaTarefas>> Cadastrar([FromBody] ListaTarefas listaTarefasACadastrar)
         {
-            ListaTarefas listaTarefas = await _listaTarefasRepository.Adicionar(listaTarefasACadastrar);
+            var listTarefas = new ListaTarefas
+            {
+                NomeLista = listaTarefasACadastrar.NomeLista,
+                UsuarioID = listaTarefasACadastrar.UsuarioID
+            };
+
+            ListaTarefas listaTarefas = await _listaTarefasRepository.Adicionar(listTarefas);
             return Ok(listaTarefas);
         }
 

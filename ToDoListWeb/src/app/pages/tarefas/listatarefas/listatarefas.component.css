@@ -110,19 +110,19 @@ body {
 }
 
 .btn-concluir:hover circle:nth-of-type(n) {
-    fill: #3ac47d;
+    fill: #00A39B;
 }
 
 .circulo-menor {
-    fill:#000000;
+    fill:#0F0F0F;
 }
 
 .fill-urgente {
-    fill: #f73224 ;
+    fill: #FF5269 ;
 }
 
 .fill-importante {
-    fill: #fac528;
+    fill: #B88D00;
 }
 
 .fill-normal {

@@ -1,7 +1,9 @@
-export class Listas {
-    id!: number;
-    nomeLista!: string;
-    idUsuario!: number;
+import { TarefasComponent } from "../pages/tarefas/tarefas/tarefas.component";
 
-    tarefas?: any;
+export class Listas {
+    id?: number;
+    nomeLista!: string;
+    usuarioID!: number;
+
+    tarefas?: TarefasComponent;
 }
