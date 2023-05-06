@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ToDoAPI.Data.DTO;
 using ToDoAPI.Models;
 using ToDoAPI.Repository.Interfaces;
 
@@ -16,43 +17,48 @@ namespace ToDoAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ListaTarefas>>> BuscarTodasListaTarefas()
+        public async Task<ActionResult<IEnumerable<ListaTarefaDTO>>> BuscarTodasListaTarefas()
         {
-            List<ListaTarefas> listaTarefas = await _listaTarefasRepository.BuscarTodasListaTarefas();
+            var listaTarefas = await _listaTarefasRepository.BuscarTodasListaTarefas();
+
+            if (listaTarefas == null) return NotFound();
+
             return Ok(listaTarefas);
+ 
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ListaTarefas>> BuscarPorId(int id)
+        public async Task<ActionResult<ListaTarefa>> BuscarPorId(int id)
         {
-            ListaTarefas listaTarefas = await _listaTarefasRepository.BuscarPorId(id);
+            ListaTarefa listaTarefas = await _listaTarefasRepository.BuscarPorId(id);
             return Ok(listaTarefas);
         }
 
         [HttpGet("BuscarPorIdUsuario/{idUsuario}")]
-        public async Task<ActionResult<List<ListaTarefas>>> BuscarPorIdUsuario(int idUsuario)
+        public async Task<ActionResult<List<ListaTarefa>>> BuscarPorIdUsuario(int idUsuario)
         {
-            List<ListaTarefas> listaTarefas = await _listaTarefasRepository.BuscarPorIdUsuario(idUsuario);
+            List<ListaTarefa> listaTarefas = await _listaTarefasRepository.BuscarPorIdUsuario(idUsuario);
             return Ok(listaTarefas);
         }
 
         [HttpPost("Cadastrar")]
-        public async Task<ActionResult<ListaTarefas>> Cadastrar([FromBody] ListaTarefas listaTarefasACadastrar)
+        public async Task<ActionResult<ListaTarefa>> Cadastrar([FromBody] ListaTarefa listaTarefasACadastrar)
         {
-            ListaTarefas listaTarefas = await _listaTarefasRepository.Adicionar(listaTarefasACadastrar);
+            ListaTarefa listaTarefas = await _listaTarefasRepository.Adicionar(listaTarefasACadastrar);
             return Ok(listaTarefas);
+
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<ListaTarefas>> Atualizar([FromBody] ListaTarefas listaTarefas, int id)
+        public async Task<ActionResult<ListaTarefa>> Atualizar([FromBody] ListaTarefa listaTarefas, int id)
         {
             listaTarefas.ID = id;
-            ListaTarefas lista = await _listaTarefasRepository.Atualizar(listaTarefas, id);
+            ListaTarefa lista = await _listaTarefasRepository.Atualizar(listaTarefas, id);
             return Ok(lista);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ListaTarefas>> Deletar(int id)
+        public async Task<ActionResult<ListaTarefa>> Deletar(int id)
         {
             bool deletado = await _listaTarefasRepository.Deletar(id);
             return Ok(deletado);

@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using ToDoAPI.Models;
 
-namespace ToDoAPI.Models
+namespace ToDoAPI.Data.DTO
 {
-    public class ListaTarefa
+    public class ListaTarefaDTO
     {
         public int ID { get; set; }
         public string? NomeLista { get; set; }
         public int UsuarioID { get; set; }
         public virtual ICollection<Tarefa>? Tarefas { get; set; }
-
     }
 }

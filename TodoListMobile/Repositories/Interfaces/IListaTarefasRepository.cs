@@ -4,10 +4,10 @@ namespace TodoListMobile.Repositories.Interfaces
 {
     public interface IListaTarefasRepository
     {
-        Task<List<ListaTarefas>> BuscarTodasListaTarefas();
-        Task<ListaTarefas> BuscarPorId(int id);
-        Task<ListaTarefas> Adicionar(ListaTarefas listaTarefas);
-        Task<ListaTarefas> Atualizar(ListaTarefas listaTarefas, int id);
+        Task<List<ListaTarefa>> BuscarTodasListaTarefas();
+        Task<ListaTarefa> BuscarPorId(int id);
+        Task<ListaTarefa> Adicionar(ListaTarefa listaTarefas);
+        Task<ListaTarefa> Atualizar(ListaTarefa listaTarefas, int id);
         Task<bool> Deletar(int id);
     }
 }

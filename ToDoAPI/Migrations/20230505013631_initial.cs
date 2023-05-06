@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ToDoAPI.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialDB : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,7 +35,7 @@ namespace ToDoAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TarefaID = table.Column<int>(type: "int", nullable: false),
                     UsuarioID = table.Column<int>(type: "int", nullable: false),
-                    NivelPermissao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NivelPermissao = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -94,26 +94,26 @@ namespace ToDoAPI.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ListaTarefaID = table.Column<int>(type: "int", nullable: false),
                     Titulo = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    Descricao = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: true),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataLimite = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DataAlteracao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Prioridade = table.Column<int>(type: "int", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    Anexo = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Prioridade = table.Column<int>(type: "int", nullable: true),
+                    Status = table.Column<int>(type: "int", nullable: true),
+                    Anexo = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
                     CriadorID = table.Column<int>(type: "int", nullable: false),
                     UltAlteradorID = table.Column<int>(type: "int", nullable: true),
-                    ListaTarefasID = table.Column<int>(type: "int", nullable: true),
                     TarefaID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tarefa", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Tarefa_ListaTarefas_ListaTarefasID",
-                        column: x => x.ListaTarefasID,
+                        name: "FK_Tarefa_ListaTarefas_ListaTarefaID",
+                        column: x => x.ListaTarefaID,
                         principalTable: "ListaTarefas",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Tarefa_Tarefa_TarefaID",
                         column: x => x.TarefaID,
@@ -178,9 +178,9 @@ namespace ToDoAPI.Migrations
                 column: "UsuarioID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tarefa_ListaTarefasID",
+                name: "IX_Tarefa_ListaTarefaID",
                 table: "Tarefa",
-                column: "ListaTarefasID");
+                column: "ListaTarefaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tarefa_TarefaID",

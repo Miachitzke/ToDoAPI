@@ -7,7 +7,8 @@
         <Border Background="black" Padding="15" Margin="10" StrokeShape="RoundRectangle 15">
             <Grid RowDefinitions="Auto" ColumnDefinitions="*">
                 <Entry 
-                Placeholder="Nomear Seção"
+                x:Name="EntryTitulo"
+                Placeholder="Título"
                 Grid.Row="0"
                 Grid.Column="0"
                 TextColor="White"/>

@@ -1,14 +1,32 @@
+using TodoListMobile.Models;
+using TodoListMobile.Repositories.Interfaces;
+
 namespace TodoListMobile.Views;
 
 public partial class ListaTarefasAdd : ContentPage
 {
-	public ListaTarefasAdd()
+    IListaTarefasRepository _listaTarefasRepository;
+            
+    public ListaTarefasAdd(IListaTarefasRepository listaTarefasRepository)
 	{
-		InitializeComponent();
-	}
+        _listaTarefasRepository = listaTarefasRepository;
+
+        InitializeComponent();
+    }
 
     private void Criar(object sender, EventArgs e)
     {
 		Navigation.PopModalAsync();
+    }
+    private void SaveListaTarefa()
+    {
+
+        ListaTarefa listaTarefa = new ListaTarefa() 
+        {
+           NomeLista = EntryTitulo.Text
+        };
+
+        _listaTarefasRepository.Adicionar(listaTarefa);
+
     }
 }

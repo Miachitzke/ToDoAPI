@@ -16,7 +16,7 @@ namespace ToDoAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<ListaTarefas>>>  BuscarTodasTarefas()
+        public async Task<ActionResult<List<ListaTarefa>>>  BuscarTodasTarefas()
         {
             List<Tarefa> tarefas = await _tarefaRepository.BuscarTodasTarefas();
             return Ok(tarefas);
@@ -30,7 +30,7 @@ namespace ToDoAPI.Controllers
         }
 
         [HttpGet("BuscarPorIdLista/{idLista}")]
-        public async Task<ActionResult<List<ListaTarefas>>> BuscarPorIdUsuario(int idLista)
+        public async Task<ActionResult<List<ListaTarefa>>> BuscarPorIdUsuario(int idLista)
         {
             List<Tarefa> tarefaFiltrada = await _tarefaRepository.BuscarPorIdLista(idLista);
             return Ok(tarefaFiltrada);
