@@ -10,7 +10,7 @@ namespace ToDoAPI.Data
 
         public DbSet<Tarefa> Tarefa { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
-        public DbSet<ListaTarefas> ListaTarefas { get; set; }
+        public DbSet<ListaTarefa> ListaTarefas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

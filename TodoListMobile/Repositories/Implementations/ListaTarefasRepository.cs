@@ -14,36 +14,36 @@ namespace TodoListMobile.Repositories.Implementations
             _client = client;
         }
 
-        public async Task<List<ListaTarefas>> BuscarTodasListaTarefas()
+        public async Task<List<ListaTarefa>> BuscarTodasListaTarefas()
         {
             var response = await _client.GetAsync(BasePath);
 
-            return await response.ReadContentAs<List<ListaTarefas>>();
+            return await response.ReadContentAs<List<ListaTarefa>>();
         }
 
-        public async Task<ListaTarefas> Adicionar(ListaTarefas listaTarefas)
+        public async Task<ListaTarefa> Adicionar(ListaTarefa listaTarefas)
         {
             var response = await _client.PostAsJson(BasePath, listaTarefas);
 
             if (response.IsSuccessStatusCode)
-                return await response.ReadContentAs<ListaTarefas>();
+                return await response.ReadContentAs<ListaTarefa>();
             else throw new Exception("Something went wrong when calling the api");
         }
 
-        public async Task<ListaTarefas> Atualizar(ListaTarefas listaTarefas, int id)
+        public async Task<ListaTarefa> Atualizar(ListaTarefa listaTarefas, int id)
         {
             var response = await _client.PutAsJson(BasePath, listaTarefas.ID);
 
             if (response.IsSuccessStatusCode)
-                return await response.ReadContentAs<ListaTarefas>();
+                return await response.ReadContentAs<ListaTarefa>();
             else throw new Exception("Something went wrong when calling the api");
         }
 
-        public async Task<ListaTarefas> BuscarPorId(int id)
+        public async Task<ListaTarefa> BuscarPorId(int id)
         {
             var response = await _client.GetAsync($"{BasePath}/{id}");
 
-            return await response.ReadContentAs<ListaTarefas>();
+            return await response.ReadContentAs<ListaTarefa>();
         }
 
          

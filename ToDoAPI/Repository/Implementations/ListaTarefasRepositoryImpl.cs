@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using ToDoAPI.Data;
+using ToDoAPI.Data.DTO;
 using ToDoAPI.Models;
 using ToDoAPI.Repository.Interfaces;
 
@@ -9,26 +11,32 @@ namespace ToDoAPI.Repository.Implementations
     {
         private readonly ToDoDbContext _dbContext;
 
-        public ListaTarefasRepositoryImpl(ToDoDbContext dbContext)
+        private IMapper _mapper;
+
+        public ListaTarefasRepositoryImpl(ToDoDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
-        public async Task<ListaTarefas> BuscarPorId(int id)
+        public async Task<ListaTarefa> BuscarPorId(int id)
         {
             return await _dbContext.ListaTarefas.FirstOrDefaultAsync(x => x.ID == id);
         }
 
-        public async Task<List<ListaTarefas>> BuscarPorIdUsuario(int idUsuario)
+        public async Task<List<ListaTarefa>> BuscarPorIdUsuario(int idUsuario)
         {
             return await _dbContext.ListaTarefas.Where(x => x.UsuarioID == idUsuario).ToListAsync();
         }
 
-        public async Task<List<ListaTarefas>> BuscarTodasListaTarefas()
+        public async Task<IEnumerable<ListaTarefaDTO>> BuscarTodasListaTarefas()
         {
-            return await _dbContext.ListaTarefas.ToListAsync();
+            List<ListaTarefa> listaTarefas = await _dbContext.ListaTarefas.ToListAsync();
+
+            return _mapper.Map<List<ListaTarefaDTO>>(listaTarefas);
+ 
         }
 
-        public async Task<ListaTarefas> Adicionar(ListaTarefas listaTarefas)
+        public async Task<ListaTarefa> Adicionar(ListaTarefa listaTarefas)
         {
             await _dbContext.ListaTarefas.AddAsync(listaTarefas);
             await _dbContext.SaveChangesAsync();
@@ -36,9 +44,9 @@ namespace ToDoAPI.Repository.Implementations
         }
 
 
-        public async Task<ListaTarefas> Atualizar(ListaTarefas listaTarefas, int id)
+        public async Task<ListaTarefa> Atualizar(ListaTarefa listaTarefas, int id)
         {
-            ListaTarefas listaPorId = await BuscarPorId(id);
+            ListaTarefa listaPorId = await BuscarPorId(id);
 
             if (listaPorId == null)
             {
@@ -57,7 +65,7 @@ namespace ToDoAPI.Repository.Implementations
 
         public async Task<bool> Deletar(int id)
         {
-            ListaTarefas listaPorId = await BuscarPorId(id);
+            ListaTarefa listaPorId = await BuscarPorId(id);
 
             if (listaPorId == null)
             {

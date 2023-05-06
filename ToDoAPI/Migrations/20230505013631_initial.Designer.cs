@@ -12,15 +12,15 @@ using ToDoAPI.Data;
 namespace ToDoAPI.Migrations
 {
     [DbContext(typeof(ToDoDbContext))]
-    [Migration("20230408183543_InitialDB")]
-    partial class InitialDB
+    [Migration("20230505013631_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -68,7 +68,7 @@ namespace ToDoAPI.Migrations
                     b.ToTable("HistTarefa");
                 });
 
-            modelBuilder.Entity("ToDoAPI.Models.ListaTarefas", b =>
+            modelBuilder.Entity("ToDoAPI.Models.ListaTarefa", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -98,7 +98,6 @@ namespace ToDoAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<byte[]>("Anexo")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<int>("CriadorID")
@@ -114,20 +113,16 @@ namespace ToDoAPI.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
-                        .IsRequired()
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
                     b.Property<int>("ListaTarefaID")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ListaTarefasID")
+                    b.Property<int?>("Prioridade")
                         .HasColumnType("int");
 
-                    b.Property<int>("Prioridade")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
+                    b.Property<int?>("Status")
                         .HasColumnType("int");
 
                     b.Property<int?>("TarefaID")
@@ -143,7 +138,7 @@ namespace ToDoAPI.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("ListaTarefasID");
+                    b.HasIndex("ListaTarefaID");
 
                     b.HasIndex("TarefaID");
 
@@ -188,7 +183,6 @@ namespace ToDoAPI.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<string>("NivelPermissao")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("TarefaID")
@@ -241,7 +235,7 @@ namespace ToDoAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ToDoAPI.Models.ListaTarefas", b =>
+            modelBuilder.Entity("ToDoAPI.Models.ListaTarefa", b =>
                 {
                     b.HasOne("ToDoAPI.Models.Usuario", null)
                         .WithMany("ListaTarefas")
@@ -252,9 +246,11 @@ namespace ToDoAPI.Migrations
 
             modelBuilder.Entity("ToDoAPI.Models.Tarefa", b =>
                 {
-                    b.HasOne("ToDoAPI.Models.ListaTarefas", null)
+                    b.HasOne("ToDoAPI.Models.ListaTarefa", null)
                         .WithMany("Tarefas")
-                        .HasForeignKey("ListaTarefasID");
+                        .HasForeignKey("ListaTarefaID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ToDoAPI.Models.Tarefa", null)
                         .WithMany("Subtarefas")
@@ -276,7 +272,7 @@ namespace ToDoAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ToDoAPI.Models.ListaTarefas", b =>
+            modelBuilder.Entity("ToDoAPI.Models.ListaTarefa", b =>
                 {
                     b.Navigation("Tarefas");
                 });

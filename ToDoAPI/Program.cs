@@ -6,12 +6,18 @@ using ToDoAPI.Repository.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ToDoAPI;
+using AutoMapper;
+using ToDoAPI.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var key = Encoding.ASCII.GetBytes(Settings.Segredo);
 
 // Add services to the container.
+
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddCors();
 builder.Services.AddControllers();
@@ -36,8 +42,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Associa o EntityFramework com as credenciais do banco de dados
-builder.Services.AddEntityFrameworkSqlServer()
-    .AddDbContext<ToDoDbContext>(
+builder.Services.AddDbContext<ToDoDbContext>(
         options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
     );
 

@@ -53,6 +53,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\ListaTarefas.xaml.cs">
+	    <DependentUpon>ListaTarefas.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\ListaTarefasAdd.xaml.cs">
 	    <DependentUpon>ListaTarefasAdd.xaml</DependentUpon>
 	  </Compile>
