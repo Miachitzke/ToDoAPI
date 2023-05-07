@@ -44,55 +44,45 @@ export class TarefasService {
   constructor(private http: HttpClient, private API: AppModule) { }
 
   listarTarefas(idLista: number): Observable<ITarefas[]> {
-    const url = this.API.getBaseUrl() + '/Tarefa/BuscarPorIdLista/'+idLista;
+    const url = this.API.getBaseUrl() + '/Tarefa/BuscarPorIdLista/' + idLista;
     return this.http.get<ITarefas[]>(url);
 
   }
 
-  criarNovaTarefa(tarefa: ITarefas) {
+  criarNovaTarefa(tarefa: ITarefas): Observable<any> {
     const url = this.API.getBaseUrl() + '/Tarefa/Cadastrar';
-    let code = '';
-    try {
-        this.http.post(url, tarefa).subscribe(response => {
-            console.log(response);
-            code = response.toString();
-        });
-        if (code.length)
-            return true;
-    } catch (error) {
-        console.log(error);
-    }
-    return false;
+
+    return this.http.post(url, tarefa)
   }
-  
+
   atualizarTarefa(tarefa: ITarefas) {
     const url = this.API.getBaseUrl() + '/Tarefa/' + tarefa.id;
     let code = '';
     try {
-        this.http.put(url, tarefa).subscribe(response => {
-            console.log(response);
-            code = response.toString();
-        });
-        if (code.length)
-            return true;
+      this.http.put(url, tarefa).subscribe(response => {
+        console.log(response);
+        code = response.toString();
+      });
+      if (code.length)
+        return true;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
     return false;
   }
-  
+
   deletarTarefa(id: number) {
     const url = this.API.getBaseUrl() + '/Tarefa/' + id;
     let code = '';
     try {
-        this.http.delete(url).subscribe(response => {
-            console.log(response);
-            code = response.toString();
-        });
-        if (code.length)
-            return true;
+      this.http.delete(url).subscribe(response => {
+        console.log(response);
+        code = response.toString();
+      });
+      if (code.length)
+        return true;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
     return false;
   }
@@ -101,14 +91,14 @@ export class TarefasService {
     const url = this.API.getBaseUrl() + '/Tarefa/Concluir/' + id;
     let code = '';
     try {
-        this.http.post(url, id).subscribe(response => {
-            console.log(response);
-            code = response.toString();
-        });
-        if (code.length)
-            return true;
+      this.http.post(url, id).subscribe(response => {
+        console.log(response);
+        code = response.toString();
+      });
+      if (code.length)
+        return true;
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
     return false;
   }

@@ -33,6 +33,9 @@ export class ListasService {
         return ttl;
     }
 
-
+    deletarLista(id: number): Observable<any> {
+        const url = `${this.baseUrl}/ListaTarefas/${id}`;
+        return this.http.delete(url);
+    }
 
 }

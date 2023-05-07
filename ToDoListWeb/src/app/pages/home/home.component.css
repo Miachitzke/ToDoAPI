@@ -24,7 +24,7 @@ i {
 #filtro-lista {
     justify-content: stretch;
     align-content: stretch;
-    width: 80%;
+    width: 75%;
 }
 
 #btn-listas {
@@ -83,4 +83,8 @@ i {
 
 .profile-image img {
     margin-left: 3px;
+}
+
+.line-spacing {
+    margin-bottom: 1rem;
 }

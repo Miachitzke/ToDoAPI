@@ -6,11 +6,29 @@
                     <span class="activity-done">Listas de Tarefa</span>
                 </div>
                 <div id="filtro-lista">
-                    <input type="text" class="form-control " placeholder="Buscar Lista">
+                    <input type="text" class="form-control " placeholder="Buscar Lista" [(ngModel)]="filtro">
                 </div>
-                <div id="btn-listas">
-                    <i class="fa fa-search fa-lg"></i>
-                    <i class="fa fa-filter fa-lg"></i>
+                <div id="btn-listas" class="btn-group">
+                    <button class="btn"><i class="fa fa-search fa-lg"></i></button>
+                    <button type="button" class="btn btn-sm dropdown-toggle" (click)="toggleOrdenacao()"
+                        data-bs-toggle="dropdown"><i class="fa fa-filter fa-lg"></i></button>
+                    <ul class="dropdown-menu dropdown-menu-end" [ngClass]="{ 'show': isOrdemOpen }"
+                        data-bs-auto-close="true">
+                        <li><a class="dropdown-item" disabled>Ordenar Listas</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(1)"><i class="fa fa-arrow-down-1-9"></i> ID
+                                (Crescente)</a></li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(0)"><i class="fa fa-arrow-down-9-1"></i> ID
+                                (Decrescente)</a></li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(2)"><i class="fa fa-arrow-down-a-z"></i>
+                                Título (Crescente)</a></li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(3)"><i class="fa fa-arrow-down-z-a"></i>
+                                Título (Decrescente)</a></li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(4)"><i class="fa fa-shuffle"></i> Ordenação
+                                Padrão</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="mt-3">
@@ -27,7 +45,7 @@
                             </button>
                         </div>
                     </li>
-                    <li *ngFor="let item of listas!">
+                    <li *ngFor="let item of listaFiltrada!">
                         <div class="d-flex justify-content-between">
                             <div class="d-flex flex-row align-items-center"><i class="fa fa-check-circle checkicon">
                                 </i>
@@ -38,10 +56,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="d-flex flex-row align-items-center">
+                            <div class="d-flex flex-row gap-2 align-items-center dropdown">
                                 <div class="d-flex flex-column mr-2">
                                 </div>
-                                <i class="fa fa-ellipsis-h"></i>
+                                <button class="btn btn-sm btn-outline-success">
+                                    <i class="fa fa-pen-to-square"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger"
+                                    (click)="showConfirmaModal(modalConfirma, item.id!, item.nomeLista!)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
                             </div>
                         </div>
                     </li>
@@ -50,3 +74,26 @@
         </div>
     </div>
 </div>
+
+<ng-template #modalConfirma let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"><i class="fa-solid fa-triangle-exclamation fa-fade"
+                    style="color: #e22222;"></i>Confirmar Exclusão</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body mb-10">
+            <h5 class="line-spacing">Tem certeza que deseja excluir a lista <a style="color: #e22222; text-decoration: underline;">{{ tituloListaDeletar }}</a>?</h5>
+            <h6 class="line-spacing">Lembre-se de que todas as tarefas associadas a ela também serão
+                excluídas. Caso existam tarefas compartilhadas nessa lista, elas não estarão mais disponíveis para outros usuários.</h6>
+        </div>
+        <div class="modal-footer gap-2">
+            <a class="link-button" style="cursor: pointer;" (click)="modal.dismiss()">
+                Cancelar
+            </a>
+            <button type="button" class="btn btn-primary" (click)="deletarLista(idListaDeletar!)">
+                Confirmar
+            </button>
+        </div>
+    </div>
+</ng-template>

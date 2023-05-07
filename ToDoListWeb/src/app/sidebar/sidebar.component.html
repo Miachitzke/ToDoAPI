@@ -1,4 +1,4 @@
-<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }">
+<div class="sidebar" [ngClass]="{ 'expanded': isExpanded }" (mouseleave)="atualizarListas()">
     <div class="header d-flex">
         <div class="content" >                
             <div class="link" [routerLink]="['/listastarefa']" [routerLinkActive]="'active'" style="cursor: pointer;"><i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp; Listas &nbsp;

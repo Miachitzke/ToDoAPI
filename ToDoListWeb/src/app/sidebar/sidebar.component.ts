@@ -24,11 +24,7 @@ export class SidebarComponent {
   ngOnInit() {
     this.atualizarListas();
 
-    setInterval(() => {
-      this.atualizarListas();
-    }, 500);
   }
-  
 
   atualizarListas() {
     const user = this.auth.usuario;
@@ -37,6 +33,8 @@ export class SidebarComponent {
       if (response)
         this.listaTarefas = response;
     });
+
+    console.log("Sidebar Atualizada!")
   }
 
   handleSidebarToggle = () => this.toggleSidebar.emit(!this.isExpanded);
