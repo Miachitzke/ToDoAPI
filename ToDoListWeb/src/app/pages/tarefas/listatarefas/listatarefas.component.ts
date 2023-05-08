@@ -158,7 +158,6 @@ export class ListaTarefasComponent implements OnInit {
         
 
       this.tarefasService.atualizarTarefa(this.tarefaSelecionada).then(() => {
-        alert("Tarefa Atualizada");  
         this.listarTarefas();
       });
     }
@@ -250,15 +249,6 @@ export class ListaTarefasComponent implements OnInit {
     this.tarefaDeletarId = id;
     this.tarefaDeletar = titulo;
     this.modalService.open(content, { centered: true });
-  }
-
-  deletarTarefa(id: number) {
-    this.tarefasService.deletarTarefa(id).subscribe((response)=> {
-      if(response) {
-        this.listarTarefas();
-        this.modalService.dismissAll();
-      }
-    });
   }
 
 }
