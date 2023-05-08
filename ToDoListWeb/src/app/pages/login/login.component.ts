@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     senhaUsuario!: string;
     confSenha!: string;
 
+    imgLogo : string = "assets/todo_logo_transparente.png";
 
     constructor(private formBuilder: FormBuilder,
         private usuarioService: UsuarioService,

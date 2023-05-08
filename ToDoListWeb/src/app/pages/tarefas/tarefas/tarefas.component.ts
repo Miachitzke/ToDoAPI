@@ -21,8 +21,9 @@ export class TarefasComponent implements OnInit{
       this.idLista = +params.get('idLista')!;
       this.tarefasService.listarTarefas(this.idLista).subscribe(response => {
     
-        if(response)
-        this.tarefas.push(...response)
+        if(response) {
+            this.tarefas.push(...response);
+        }
       
       });
     });

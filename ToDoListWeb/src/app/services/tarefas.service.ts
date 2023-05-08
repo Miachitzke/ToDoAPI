@@ -46,7 +46,6 @@ export class TarefasService {
   listarTarefas(idLista: number): Observable<ITarefas[]> {
     const url = this.API.getBaseUrl() + '/Tarefa/BuscarPorIdLista/' + idLista;
     return this.http.get<ITarefas[]>(url);
-
   }
 
   criarNovaTarefa(tarefa: ITarefas): Observable<any> {
@@ -56,51 +55,54 @@ export class TarefasService {
   }
 
   atualizarTarefa(tarefa: ITarefas) {
-    const url = this.API.getBaseUrl() + '/Tarefa/' + tarefa.id;
-    let code = '';
-    try {
-      this.http.put(url, tarefa).subscribe(response => {
-        console.log(response);
-        code = response.toString();
-      });
-      if (code.length)
-        return true;
-    } catch (error) {
-      console.log(error);
-    }
-    return false;
+    return new Promise((resolve, reject) => {
+        const url = this.API.getBaseUrl() + '/Tarefa/' + tarefa.id;
+        let code = '';
+        try {
+            this.http.put(url, tarefa).subscribe(response => {
+                code = response.toString();
+                if (code)
+                    resolve(code);
+            });
+        } catch (error) {
+          console.log(error);
+          reject();
+        }
+    });
   }
 
   deletarTarefa(id: number) {
-    const url = this.API.getBaseUrl() + '/Tarefa/' + id;
-    let code = '';
-    try {
-      this.http.delete(url).subscribe(response => {
-        console.log(response);
-        code = response.toString();
-      });
-      if (code.length)
-        return true;
-    } catch (error) {
-      console.log(error);
-    }
-    return false;
+    return new Promise((resolve, reject) => {
+        const url = this.API.getBaseUrl() + '/Tarefa/' + id;
+        let code = '';
+        try {
+            this.http.delete(url).subscribe(response => {
+                code = response.toString();
+                if (code)
+                    resolve(code);
+            });
+        } catch (error) {
+          console.log(error);
+          reject();
+        }
+    });
   }
 
   concluirTarefa(id: number) {
-    const url = this.API.getBaseUrl() + '/Tarefa/Concluir/' + id;
-    let code = '';
-    try {
-      this.http.post(url, id).subscribe(response => {
-        console.log(response);
-        code = response.toString();
-      });
-      if (code.length)
-        return true;
-    } catch (error) {
-      console.log(error);
-    }
-    return false;
+    return new Promise((resolve, reject) => {
+        const url = this.API.getBaseUrl() + '/Tarefa/Concluir/' + id;
+        let code = '';
+        try {
+            this.http.post(url, id).subscribe(response => {
+                code = response.toString();
+                if (code)
+                    resolve(code);
+            });
+        } catch (error) {
+        console.log(error);
+        reject();
+        }
+    });
   }
 
 }

@@ -11,7 +11,7 @@
                     <li class="btn d-block bg-light" (click)="openModal()" style="cursor: pointer;">
                         <h6 class="mt-2 " style="cursor: pointer;"><i class="fa fa-plus"></i> Nova Tarefa</h6>
                     </li>
-                    <li class="list-group-item " *ngFor="let tarefa of tarefas; trak" >
+                    <li class="list-group-item " *ngFor="let tarefa of tarefas; trak" style="cursor: pointer;" (click)="openModal(tarefa)" >
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left mr-2">
@@ -19,7 +19,7 @@
                                         <svg width="35px" height="35px" viewBox="0 0 24 24">
                                             <title>Concluir</title>
                                             <defs></defs>
-                                            <g class="btn btn-concluir"  (click)="concluirTarefa(tarefa.id!)"  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g class="btn btn-concluir"  (click)="concluirTarefa(tarefa.id!)" onclick="event.stopPropagation()"  stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                                                 <polygon id="bound" points="0 0 24 0 24 24 0 24" ></polygon>
                                                 <circle class="circulo-maior" [ngClass]="getPrioridadeCssClass(tarefa.prioridade!)" opacity="0.8" cx="12" cy="12" r="7"></circle>
                                                 <circle class="circulo-menor" opacity="0.3" cx="12" cy="12" r="5"></circle>
@@ -28,12 +28,12 @@
                                     </div>
 
                                 </div>
-                                <div class="widget-content-left" style="cursor: pointer;" (click)="openModal(tarefa)">
+                                <div class="widget-content-left">
                                     <div class="widget-heading" [ngClass]="getPrazoCssClass(tarefa.dataLimite!)">{{tarefa.titulo}}</div>
                                     <div class="widget-subheading"><i>{{tarefa.descricao}}</i></div>
                                     <div class="widget-subheading mt-2 d-flex">
                                         <div *ngIf="tarefa.dataLimite" [ngClass]="getPrazoCssClass(tarefa.dataLimite)">
-                                            <i class="fa fa-calendar" aria-hidden="true"></i><i class="p-1">Prazo: {{getPrazo(tarefa.dataLimite).toLocaleDateString("pt-br")}}</i>
+                                            <i class="fa fa-calendar" aria-hidden="true"></i><i class="p-1">Prazo: {{getPrazo(tarefa.dataLimite)?.toLocaleDateString("pt-br")}}</i>
                                         </div>
                                         <!-- <div style="margin-left: 10px">
                                             <i class="fa fa-at" aria-hidden="true"></i><i class="p-1">João</i>
@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <button class="border-0 btn-transition btn btn-outline-danger" (click)="deletarTarefa(tarefa.id!)">
+                                    <button class="border-0 btn-transition btn btn-outline-danger" (click)="deletarTarefa(tarefa.id!)" onclick="event.stopPropagation()">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
@@ -66,7 +66,7 @@
 <ng-template #modalTarefa let-modal>
     <div class="modal-content">
         <div class="modal-header">
-            <div class="icon" (click)="concluirTarefa(tarefaSelecionada!.id!)" >
+            <div class="icon" (click)="concluirTarefa(tarefaSelecionada!.id!)" onclick="event.stopPropagation()">
                 <svg width="35px" height="35px" viewBox="0 0 24 24">
                     <title>Concluir</title>
                     <defs></defs>
