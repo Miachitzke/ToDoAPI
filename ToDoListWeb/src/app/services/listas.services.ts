@@ -26,6 +26,11 @@ export class ListasService {
         return this.http.post(url,lista);
     }
 
+    editarLista(lista: Listas): Observable<any> {
+        const url = `${this.baseUrl}/ListaTarefas/${lista.id!}`;
+        return this.http.put(url, lista);
+    }
+
     tituloLista(idLista: number): any {
         const listaFiltrada = this.listas.find(lt => lt.id === idLista);
         var ttl = listaFiltrada ? listaFiltrada.nomeLista : '';

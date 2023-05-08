@@ -208,6 +208,10 @@ body {
     padding: 10px;
 }
 
+.input-group {
+    width: 100%;
+}
+
 .no-resize {
     resize: none;
 }

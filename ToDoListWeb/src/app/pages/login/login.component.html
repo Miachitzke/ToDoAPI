@@ -9,7 +9,7 @@
       <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email" required
         autofocus>
 
-      <input type="password" id="senha" formControlName="senha" class="form-control" placeholder="Senha" required>
+      <input type="password" id="senha" formControlName="senha" class="form-control" placeholder="Senha" required (keydown.enter)="logar()">
 
       <button class="btn btn-lg btn-primary btn-block btn-signin" (click)="logar()">Entrar</button>
       <div id="lembrar" class="checkbox">
@@ -53,10 +53,10 @@
           </div>
 
           <div class="input-group mb-3">
-            <span class="input-group-text fas fa-lock"></span>
+            <span class="input-group-text"><i class="fa fa-lock"></i></span>
             <input type="password" class="form-control rounded-end" style="margin-right: 10px;" placeholder="Senha"
               required [(ngModel)]="senhaUsuario" (input)="comparaSenha()">
-            <span class="input-group-text fas fa-lock rounded-start"></span>
+            <span class="input-group-text rounded-start"><i class="fa fa-lock"></i></span>
             <input type="password" name="confSenha" class="form-control " placeholder="Confirmar senha" required
               [(ngModel)]="confSenha" (input)="comparaSenha()">
 

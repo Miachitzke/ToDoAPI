@@ -146,16 +146,6 @@ export class ListaTarefasComponent implements OnInit {
     }
   }
 
-  deletarTarefa(id: number) {
-    let isTarefaDeletada = false;
-    if (this.tarefaSelecionada) {
-      isTarefaDeletada = this.tarefasService.deletarTarefa(id);
-    }
-
-    if (isTarefaDeletada)
-      alert("Tarefa Deletada");
-  }
-
   concluirTarefa(idTarefa: number) {
 
     if (idTarefa) {
@@ -229,6 +219,24 @@ export class ListaTarefasComponent implements OnInit {
         textarea.style.overflow = 'hidden';
 
     }
+  }
+
+  tarefaDeletarId!: number;
+  tarefaDeletar!: string;
+
+  showConfirmaModal(content: any, id: number, titulo: string) {
+    this.tarefaDeletarId = id;
+    this.tarefaDeletar = titulo;
+    this.modalService.open(content, { centered: true });
+  }
+
+  deletarTarefa(id: number) {
+    this.tarefasService.deletarTarefa(id).subscribe((response)=> {
+      if(response) {
+        this.listarTarefas();
+        this.modalService.dismissAll();
+      }
+    });
   }
 
 }

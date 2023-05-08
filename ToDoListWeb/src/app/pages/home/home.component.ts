@@ -24,12 +24,15 @@ export class HomeComponent {
   listaNova?: Listas;
   tituloListaNova!: string;
 
+  listaEditarId!: number;
+  tituloListaEditar!: string;
+
   isOrdemOpen: boolean = false;
   isOptionsOpen: boolean = false;
 
   constructor(private listaService: ListasService,
-              private modalService: NgbModal,
-              private auth: UsuarioAutenticadoGuard) { }
+    private modalService: NgbModal,
+    private auth: UsuarioAutenticadoGuard) { }
 
   ngOnInit() {
     this.listas.splice(0, this.listas.length);
@@ -63,10 +66,26 @@ export class HomeComponent {
       alert("titulo não pode ser vazio")
   }
 
+  editarLista() {
+    if (this.tituloListaEditar) {
+      let editLista: Listas = { id: this.listaEditarId, nomeLista: this.tituloListaEditar, usuarioID: this.auth.usuario.id! }
+
+      this.listaService.editarLista(editLista).subscribe((response) => {
+        if (response) {
+          this.ngOnInit();
+          this.listaEditarId = 0;
+        }
+      },
+        (erro) => {
+          console.log(erro);
+        })
+    }
+  }
+
   set filtro(value: string) {
     this.filtroLista = value;
 
-    this.listaFiltrada = this.listas.filter((lt: Listas)=> lt.nomeLista.toLocaleLowerCase().indexOf(this.filtroLista.toLocaleLowerCase()) > -1 );
+    this.listaFiltrada = this.listas.filter((lt: Listas) => lt.nomeLista.toLocaleLowerCase().indexOf(this.filtroLista.toLocaleLowerCase()) > -1);
   }
 
   get filtro() {
@@ -80,12 +99,13 @@ export class HomeComponent {
   }
 
   deletarLista(id: number) {
-    if(id)
-      this.listaService.deletarLista(id).subscribe((response)=> {
+    if (id)
+      this.listaService.deletarLista(id).subscribe((response) => {
         if (response) {
           this.ngOnInit();
           this.modalService.dismissAll();
-      }})
+        }
+      })
   }
 
   toggleOrdenacao() {

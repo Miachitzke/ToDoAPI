@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { IUsuario } from '../../interfaces/IUsuario';
 import { UsuarioService } from '../../services/usuario.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -24,8 +25,8 @@ export class LoginComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private usuarioService: UsuarioService,
-        private modalService: NgbModal,
-        private http: HttpClient) { }
+        private router: Router,
+        private modalService: NgbModal) { }
 
     ngOnInit(): void {
         this.criarForm();
@@ -41,9 +42,18 @@ export class LoginComponent implements OnInit {
 
     logar() {
         if (this.formLogin.invalid) return;
-        
+
         var usuario = this.formLogin.getRawValue() as IUsuario;
-        this.usuarioService.logar(usuario, this.lembrar!);
+        this.usuarioService.logar(usuario, this.lembrar!).subscribe((token) => {
+            localStorage.setItem('token', token);
+
+            this.router.navigate(['listastarefa']);
+        },
+            (error) => {
+                alert(error);
+            });
+
+
     }
 
     openModal(content: any) {
@@ -61,8 +71,7 @@ export class LoginComponent implements OnInit {
     }
 
     criarUsuario() {
-        if(this.nomeUsuario && this.loginUsuario && this.emailUsuario && this.compara)
-        {
+        if (this.nomeUsuario && this.loginUsuario && this.emailUsuario && this.compara) {
             const usuario: IUsuario = {
                 nome: this.nomeUsuario,
                 login: this.loginUsuario,
@@ -72,15 +81,14 @@ export class LoginComponent implements OnInit {
 
             this.usuarioService.novoUsuario(usuario).subscribe(
                 (response) => {
-                    console.log(response);                    
+                    console.log(response);
                 },
                 (error) => {
-                    console.error(error);                    
+                    console.error(error);
                 }
             );
         }
-        else
-        {
+        else {
             alert('erro');
         }
     }

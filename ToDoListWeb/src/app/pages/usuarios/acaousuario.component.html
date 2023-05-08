@@ -17,10 +17,10 @@
         </div>
 
         <div class="input-group mb-3">
-            <span class="input-group-text fa fa-lock"></span>
+            <span class="input-group-text"><i class="fa fa-lock"></i></span>
             <input type="password" name="senha" class="form-control rounded-end" style="margin-right: 10px;"
                 placeholder="Senha" required [(ngModel)]="senha" (input)="comparaSenha()">
-            <span class="input-group-text fa fa-lock rounded-start"></span>
+            <span class="input-group-text rounded-start"><i class="fa fa-lock"></i></span>
             <input type="password" name="confSenha" class="form-control " placeholder="Confirmar senha" required
                 [(ngModel)]="confSenha" (input)="comparaSenha()">
         </div>

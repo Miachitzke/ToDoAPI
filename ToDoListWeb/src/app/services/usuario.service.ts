@@ -23,26 +23,25 @@ export class UsuarioService {
 
         return this.httpClient.post<IUsuario>(`${this.baseUrl}/Usuario/Cadastrar`, usuario);
     }
-
-    login(usuario: IUsuario): Observable<any> {
+    
+    logar(usuario: IUsuario, lembrar: boolean): Observable<any> {
         return this.httpClient.post(`${this.baseUrl}/Usuario/login`, usuario, { responseType: 'text' });
-    }
-
-    logar(usuario: IUsuario, lembrar: boolean) {
-        this.login(usuario).subscribe(
+        
+        /* this.login(usuario).subscribe(
             (token: string) => {
                 
                 localStorage.setItem('token', token);
 
                 this.mostrarMenuEmitter.emit(true);
                 this.router.navigate(['listastarefa']);
+                return token;
             },
             (error) => {
                 console.error(error);
                 this.mostrarMenuEmitter.emit(false);
-            },
-            () => console.log('Login concluído')
-        );
+                return error;
+            }
+        ); */
     }
     
     deslogar() {

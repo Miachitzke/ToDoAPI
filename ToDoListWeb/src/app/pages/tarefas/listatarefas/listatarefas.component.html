@@ -44,7 +44,7 @@
                                     </div>
                                 </div>
                                 <div class="widget-content-right">
-                                    <button class="border-0 btn-transition btn btn-outline-danger" (click)="deletarTarefa(tarefa.id!)">
+                                    <button class="border-0 btn-transition btn btn-outline-danger" (click)="showConfirmaModal(modalConfirma, tarefa.id!, tarefa.titulo!)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
@@ -123,6 +123,29 @@
         <div class="modal-footer">
             <button *ngIf="!tarefaNova" type="button" class="btn btn-primary" (click)="atualizarTarefa(); modal.dismiss();">Atualizar</button>
             <button *ngIf="tarefaNova" type="button" class="btn btn-primary" (click)="novaTarefa(); modal.dismiss();">Criar Tarefa</button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #modalConfirma let-modal>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"><i class="fa-solid fa-triangle-exclamation fa-fade"
+                    style="color: #e22222;"></i> Confirmar Exclusão</h4>
+            <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body mb-10">
+            <h5 class="line-spacing" >Você está prestes a excluir a tarefa: <a style="color: #e22222; text-decoration: underline;">{{ tarefaDeletar! }}</a>.<br/> Tem certeza disso? </h5>
+            <h6 class="line-spacing">
+                Lembre-se de que, caso essa seja uma tarefa compartilhada, ela não estará mais disponível para outros usuários.</h6>
+        </div>
+        <div class="modal-footer gap-2">
+            <a class="link-button" style="cursor: pointer;" (click)="modal.dismiss()">
+                Cancelar
+            </a>
+            <button type="button" class="btn btn-primary" (click)="deletarTarefa(tarefaDeletarId!)">
+                Confirmar
+            </button>
         </div>
     </div>
 </ng-template>

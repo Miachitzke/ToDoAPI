@@ -39,7 +39,8 @@
                         <div *ngIf="nvList" class="input-group" (keydown.escape)="nvList = !nvList">
                             <input type="text" class="form-control" placeholder="Nome da Lista"
                                 [(ngModel)]="tituloListaNova" autofocus (ngBlur)="nvList = !nvList"
-                                (keydown.escape)="nvList = !nvList">
+                                (keydown.escape)="nvList = !nvList"
+                                (keydown.enter)="tituloListaNova? novaLista() : nvList = !nvList">
                             <button type="button" class="btn btn-outline-secondary" (click)="novaLista()">
                                 <i style="color: #35d03f;" class="fa fa-check"></i>
                             </button>
@@ -50,17 +51,25 @@
                             <div class="d-flex flex-row align-items-center"><i class="fa fa-check-circle checkicon">
                                 </i>
                                 <div class="ml-2">
-                                    <h6 class="mb-0"><a class="linkTarefas"
-                                            [routerLink]="['/listartarefas/',item.id]">{{ item.nomeLista }}</a></h6>
-                                    <div class="d-flex flex-row mt-1 text-black-50 date-time">
+                                    <h6 *ngIf="listaEditarId !== item.id!" class="mb-0"><a class="linkTarefas"
+                                        [routerLink]="['/listartarefas/',item.id]">{{ item.nomeLista }}</a>
+                                    </h6>
+                                    <div *ngIf="listaEditarId === item.id!" class="input-group" (keydown.escape)="listaEditarId = 0">
+                                        <input type="text" style="font-weight: bold; font-size: 1.2rem; " class="form-control" value="tituloListaEditar"
+                                            [(ngModel)]="tituloListaEditar" autofocus (ngBlur)="listaEditarId = 0"
+                                            (keydown.escape)="listaEditarId = 0"
+                                            (keydown.enter)="tituloListaEditar? editarLista() : listaEditarId = 0">
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex flex-row gap-2 align-items-center dropdown">
                                 <div class="d-flex flex-column mr-2">
                                 </div>
-                                <button class="btn btn-sm btn-outline-success">
+                                <button *ngIf="listaEditarId !== item.id!" class="btn btn-sm btn-outline-success" (click)="listaEditarId = item.id!; tituloListaEditar = item.nomeLista!">
                                     <i class="fa fa-pen-to-square"></i>
+                                </button>
+                                <button *ngIf="listaEditarId === item.id!" class="btn btn-sm btn-outline-success" (click)="editarLista() ;listaEditarId = 0">
+                                    <i class="fa fa-check"></i>
                                 </button>
                                 <button class="btn btn-sm btn-outline-danger"
                                     (click)="showConfirmaModal(modalConfirma, item.id!, item.nomeLista!)">
@@ -83,9 +92,11 @@
             <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
         </div>
         <div class="modal-body mb-10">
-            <h5 class="line-spacing">Tem certeza que deseja excluir a lista <a style="color: #e22222; text-decoration: underline;">{{ tituloListaDeletar }}</a>?</h5>
+            <h5 class="line-spacing">Tem certeza que deseja excluir a lista <a
+                    style="color: #e22222; text-decoration: underline;">{{ tituloListaDeletar }}</a>?</h5>
             <h6 class="line-spacing">Lembre-se de que todas as tarefas associadas a ela também serão
-                excluídas. Caso existam tarefas compartilhadas nessa lista, elas não estarão mais disponíveis para outros usuários.</h6>
+                excluídas. Caso existam tarefas compartilhadas nessa lista, elas não estarão mais disponíveis para
+                outros usuários.</h6>
         </div>
         <div class="modal-footer gap-2">
             <a class="link-button" style="cursor: pointer;" (click)="modal.dismiss()">
