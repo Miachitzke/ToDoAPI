@@ -48,11 +48,17 @@ export class ListaTarefasComponent implements OnInit {
       this.tituloLista = this.listaService.tituloLista(this.idLista);
 
       this.tarefasService.listarTarefas(this.idLista).subscribe(response => {
-
-        if (response)
-          this.tarefas.push(...response)
+        
+        if (response) {
+            response.forEach(e => {
+                if (e.status != "2")
+                this.tarefas.push(e)
+            });
+        }
 
       });
+
+      
     }
   }
 
@@ -76,23 +82,29 @@ export class ListaTarefasComponent implements OnInit {
   }
 
   getPrazo(data: string) {
-    let dataFormatada = new Date(data);
-    dataFormatada.setUTCDate(dataFormatada.getUTCDate() + 1);
-    dataFormatada.setHours(0, 0, 0, 0);
-    return dataFormatada;
+    if (data) {
+        let dataFormatada = new Date(data);
+        dataFormatada.setUTCDate(dataFormatada.getUTCDate() + 1);
+        dataFormatada.setHours(0, 0, 0, 0);
+        return dataFormatada;
+    }
+    return null;
   }
 
   getPrazoCssClass(prazo: string) {
     let classe = '';
     let dataLimite = this.getPrazo(prazo);
     let dataHoje = new Date();
-    let vespera = this.getPrazo(prazo);
-    vespera.setDate(dataLimite.getDate() - 1);
-
-    if (dataHoje.toLocaleDateString() == vespera.toLocaleDateString())
-      classe = 'prazo-importante';
-    else if (dataHoje >= dataLimite)
-      classe = 'prazo-urgente';
+    
+    if (dataLimite) {
+        let vespera = dataLimite;
+        vespera.setDate(dataLimite.getDate() - 1);
+    
+        if (dataHoje.toLocaleDateString() == vespera.toLocaleDateString())
+          classe = 'prazo-importante';
+        else if (dataHoje >= dataLimite)
+          classe = 'prazo-urgente';
+    }
 
     return classe;
   }
@@ -116,8 +128,13 @@ export class ListaTarefasComponent implements OnInit {
       if(this.idUsuario) { this.tarefaSelecionada.criadorID = this.idUsuario; } 
       else{ this.tarefaSelecionada.criadorID = parseInt(JSON.parse(localStorage.getItem('usuario')!).id!) }
       
+      if (!this.tarefaSelecionada.prioridade)
+        this.tarefaSelecionada.prioridade = 4;
+      
       this.tarefaSelecionada.dataCriacao = new Date().toISOString();
-      this.tarefaSelecionada.dataLimite = new Date(this.prazoSelecionado.year!, this.prazoSelecionado.month! - 1, this.prazoSelecionado.day!).toISOString();
+      
+      if (this.prazoSelecionado.year)
+        this.tarefaSelecionada.dataLimite = new Date(this.prazoSelecionado.year!, this.prazoSelecionado.month! - 1, this.prazoSelecionado.day!).toISOString();
 
       console.log(this.tarefaSelecionada);
 
@@ -129,34 +146,39 @@ export class ListaTarefasComponent implements OnInit {
   }
 
   atualizarTarefa() {
-    let isTarefaAtualizada = false;
     if (this.tarefaSelecionada) {
       this.tarefaSelecionada.listaTarefaID = this.idLista;
       this.tarefaSelecionada.ultAlteradorID = this.idUsuario;
       this.tarefaSelecionada.dataCriacao = new Date().toISOString();
-      this.tarefaSelecionada.dataLimite = new Date(this.prazoSelecionado.year!, this.prazoSelecionado.month! - 1, this.prazoSelecionado.day!).toISOString();
+      if (this.prazoSelecionado.year)
+        this.tarefaSelecionada.dataLimite = new Date(this.prazoSelecionado.year!, this.prazoSelecionado.month! - 1, this.prazoSelecionado.day! - 1).toISOString();
       this.tarefaSelecionada.dataUltAlteracao = new Date().toISOString();
 
-      isTarefaAtualizada = this.tarefasService.atualizarTarefa(this.tarefaSelecionada);
-    }
+        console.log(this.tarefaSelecionada);
+        
 
-    if (isTarefaAtualizada){  
-      alert("Tarefa Atualizada");
-      this.listarTarefas();
+      this.tarefasService.atualizarTarefa(this.tarefaSelecionada).then(() => {
+        alert("Tarefa Atualizada");  
+        this.listarTarefas();
+      });
+    }
+  }
+
+  deletarTarefa(id: number) {;
+    if (this.tarefaSelecionada) {
+      this.tarefasService.deletarTarefa(id).then(() => {
+          this.listarTarefas();
+      });
     }
   }
 
   concluirTarefa(idTarefa: number) {
-
     if (idTarefa) {
-      let isTarefaConcluida = false;
       if (this.tarefaSelecionada) {
-        isTarefaConcluida = this.tarefasService.concluirTarefa(idTarefa);
+        this.tarefasService.concluirTarefa(idTarefa).then(() => {
+            this.listarTarefas();
+        });
       }
-
-      if (isTarefaConcluida)
-        alert("Tarefa ID: " + idTarefa + " concluída com sucesso!");
-      this.listarTarefas();
     }
     else {
       alert("A tarefa não pôde ser concluída!");
