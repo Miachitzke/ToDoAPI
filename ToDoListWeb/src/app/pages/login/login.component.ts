@@ -4,8 +4,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { IUsuario } from '../../interfaces/IUsuario';
 import { UsuarioService } from '../../services/usuario.service';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { eventListeners } from '@popperjs/core';
 
 @Component({
     selector: 'app-login',
@@ -22,6 +22,8 @@ export class LoginComponent implements OnInit {
     senhaUsuario!: string;
     confSenha!: string;
 
+    cadSucesso = false;
+    loginSucesso =true;
 
     constructor(private formBuilder: FormBuilder,
         private usuarioService: UsuarioService,
@@ -49,11 +51,13 @@ export class LoginComponent implements OnInit {
 
             this.router.navigate(['listastarefa']);
         },
-            (error) => {
-                alert(error);
+            () => {
+                this.loginSucesso = false;
+
+                setTimeout(()=>{
+                    this.loginSucesso = true;
+                },5000);
             });
-
-
     }
 
     openModal(content: any) {
@@ -70,6 +74,12 @@ export class LoginComponent implements OnInit {
             this.compara = false;
     }
 
+    tipoInput = 'password';
+
+    mostrarSenha() {
+        this.tipoInput = this.tipoInput === 'password' ? 'text' : 'password';
+    }
+
     criarUsuario() {
         if (this.nomeUsuario && this.loginUsuario && this.emailUsuario && this.compara) {
             const usuario: IUsuario = {
@@ -81,6 +91,14 @@ export class LoginComponent implements OnInit {
 
             this.usuarioService.novoUsuario(usuario).subscribe(
                 (response) => {
+                    this.modalService.dismissAll();
+
+                    this.cadSucesso = true;
+
+                    setTimeout(() => {
+                        this.cadSucesso = false;
+                    }, 2000);
+
                     console.log(response);
                 },
                 (error) => {

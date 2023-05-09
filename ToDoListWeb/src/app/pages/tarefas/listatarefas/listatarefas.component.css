@@ -219,3 +219,21 @@ body {
 .no-overflow {
     overflow:hidden;
 }
+
+.controle-search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    column-gap: 4px;
+    margin-top: 10px;
+    margin-left: 35px;
+}
+
+#filtro-tarefa {    
+    width: 90%;
+}
+
+#btn-listas {
+    margin-right: 45px;
+}

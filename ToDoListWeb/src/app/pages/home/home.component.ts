@@ -41,9 +41,9 @@ export class HomeComponent {
     this.listaService.buscarListas(idUsuario).subscribe(response => {
 
       if (response) {
-        this.listas = response;
         this.listasOriginal = [...response];
-        this.listaFiltrada = this.listasOriginal;
+
+        this.listaFiltrada = this.listasOriginal.sort((a, b) => b.id! - a.id!);
       }
     });
   }
@@ -85,7 +85,8 @@ export class HomeComponent {
   set filtro(value: string) {
     this.filtroLista = value;
 
-    this.listaFiltrada = this.listas.filter((lt: Listas) => lt.nomeLista.toLocaleLowerCase().indexOf(this.filtroLista.toLocaleLowerCase()) > -1);
+    this.listaFiltrada = this.listasOriginal.filter((lt: Listas) => lt.nomeLista.toLocaleLowerCase().indexOf(this.filtroLista.toLocaleLowerCase()) > -1);
+    this.listas = this.listaFiltrada.slice();
   }
 
   get filtro() {
@@ -113,6 +114,7 @@ export class HomeComponent {
   }
 
   ordenarLista(ordem: number) {
+
     switch (ordem) {
       case 0: // ordem id Maior para Menor
         this.listaFiltrada.sort((a, b) => b.id! - a.id!);
@@ -127,6 +129,7 @@ export class HomeComponent {
         this.listaFiltrada.sort((a, b) => b.nomeLista!.localeCompare(a.nomeLista!));
         break;
       default: // ordem original do array
+
         this.listaFiltrada = this.listas.slice();
         break;
     }

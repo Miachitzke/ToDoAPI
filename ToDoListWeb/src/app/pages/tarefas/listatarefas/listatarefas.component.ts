@@ -14,12 +14,20 @@ export class ListaTarefasComponent implements OnInit {
   idLista?: number;
   idUsuario!: number;
   tituloLista?: string;
+
   tarefas: ITarefas[] = [];
+  tarefaOriginal: ITarefas[] = [];
+  tarefaFiltrada: ITarefas[] = [];
+  filtroTarefas!: string;
+
   tarefaSelecionada: ITarefas = new ITarefas;
+
   prazoSelecionado = { day: 0, month: 0, year: 0 };
   checkbox: any;
   cor: string = '';
+
   tarefaNova: boolean = false;
+  isOrdemOpen: boolean = false;
 
   @ViewChild("modalTarefa") modalEditarTarefa: TemplateRef<any> | undefined;
 
@@ -29,28 +37,23 @@ export class ListaTarefasComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-  this.route.paramMap.subscribe(params => {
-      this.idLista = +params.get('idLista')!;
       this.listarTarefas();
-    });
-
-
-  }
-
-  ngOnChanges() {
-    this.listarTarefas();
   }
 
   listarTarefas() {
+
+    this.route.paramMap.subscribe((params) => {
+      this.idLista = +params.get('idLista')!});
+
     this.tarefas = [];
 
     if (this.idLista) {
-      this.tituloLista = this.listaService.tituloLista(this.idLista);
-
       this.tarefasService.listarTarefas(this.idLista).subscribe(response => {
 
         if (response)
-          this.tarefas.push(...response)
+          this.tarefaOriginal.push(...response)
+
+          this.tarefaFiltrada = this.tarefaOriginal.sort((a, b) => b.id! - a.id!);
 
       });
     }
@@ -237,6 +240,43 @@ export class ListaTarefasComponent implements OnInit {
         this.modalService.dismissAll();
       }
     });
+  }
+
+  
+  set filtro(value: string) {
+    this.filtroTarefas = value;
+
+    this.tarefaFiltrada = this.tarefaOriginal.filter((tar: ITarefas) => tar.titulo!.toLocaleLowerCase().indexOf(this.filtroTarefas.toLocaleLowerCase()) > -1);
+    this.tarefas = this.tarefaFiltrada.slice();
+  }
+
+  get filtro() {
+    return this.filtroTarefas;
+  }
+
+  toggleOrdenacao() {
+    this.isOrdemOpen = !this.isOrdemOpen;
+  }
+
+  ordenarLista(ordem: number) {
+    switch (ordem) {
+      case 0: // ordem id Maior para Menor
+        this.tarefaFiltrada.sort((a, b) => b.id! - a.id!);
+        break;
+      case 1: // ordem id Menor para Maior
+        this.tarefaFiltrada.sort((a, b) => a.id! - b.id!);
+        break;
+      case 2: // ordem nome (A pra Z)
+        this.tarefaFiltrada.sort((a, b) => a.titulo!.localeCompare(b.titulo!));
+        break;
+      case 3: // ordem nome (Z pra A)
+        this.tarefaFiltrada.sort((a, b) => b.titulo!.localeCompare(a.titulo!));
+        break;
+      default: // ordem original do array
+        this.tarefaFiltrada = this.tarefas.slice();
+        break;
+    }
+    this.toggleOrdenacao();
   }
 
 }

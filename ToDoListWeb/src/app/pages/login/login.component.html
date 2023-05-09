@@ -4,12 +4,28 @@
       src="https://atos.net/wp-content/uploads/2022/02/atos-globe-blue-high-res-150x150.png" />
     <p id="profile-name" class="profile-name-card"></p>
 
-    <form [formGroup]="formLogin" class="form-signin">
-      <span id="reauth-email" class="reauth-email"></span>
-      <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email" required
-        autofocus>
+    <ngb-alert *ngIf="cadSucesso" id="ngb-cadSucesso" [dismissible]="true">
+      Cadastro realizado com sucesso!
+    </ngb-alert>
 
-      <input type="password" id="senha" formControlName="senha" class="form-control" placeholder="Senha" required (keydown.enter)="logar()">
+    <ngb-alert *ngIf="!loginSucesso" id="ngb-loginSucesso" [dismissible]="true">
+      Aviso: Usuário ou senha incorreto. Tente novamente!
+    </ngb-alert>
+
+    <form [formGroup]="formLogin" class="form-signin">
+      <div class="input-group mb-3">
+        <span class=" input-group-text fa fa-envelope"></span>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Email" required
+          autofocus>
+      </div>
+
+      <div class="input-group mb-3">
+        <input type="{{tipoInput}}" id="senha" formControlName="senha" class="form-control" placeholder="Senha" required
+          (keydown.enter)="logar()">
+        <span id="mostrarSenha" style="cursor: pointer;" class="input-group-text fa"
+          [ngClass]="{'fa-eye': tipoInput === 'password', 'fa-eye-slash': tipoInput === 'text'}"
+          (click)="mostrarSenha()"></span>
+      </div>
 
       <button class="btn btn-lg btn-primary btn-block btn-signin" (click)="logar()">Entrar</button>
       <div id="lembrar" class="checkbox">
@@ -21,17 +37,21 @@
     </form>
 
     <p></p>
-    <a class="forgot-password btn-link" align="center" style="cursor: pointer;" (click)="openModal(modalCadastro)">
+    <a class="forgot-password btn-link" align="center" style="cursor: pointer;"
+      (click)="openModal(modalCadastro); tipoInput = 'password' ">
       Novo por aqui? Cadastre-se
     </a>
   </div>
 </div>
 
+
+
 <ng-template #modalCadastro let-modal>
   <div class="modal-content">
     <div class="modal-header">
       <h5 class="modal-title">Cadastrar</h5>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+      <button type="button" class="btn-close" aria-label="Close"
+        (click)="modal.dismiss('Cross click'); tipoInput = 'password'"></button>
     </div>
     <div class="modal-body">
 
@@ -54,12 +74,15 @@
 
           <div class="input-group mb-3">
             <span class="input-group-text"><i class="fa fa-lock"></i></span>
-            <input type="password" class="form-control rounded-end" style="margin-right: 10px;" placeholder="Senha"
+            <input type="{{tipoInput}}" class="form-control rounded-end" style="margin-right: 10px;" placeholder="Senha"
               required [(ngModel)]="senhaUsuario" (input)="comparaSenha()">
-            <span class="input-group-text rounded-start"><i class="fa fa-lock"></i></span>
-            <input type="password" name="confSenha" class="form-control " placeholder="Confirmar senha" required
-              [(ngModel)]="confSenha" (input)="comparaSenha()">
 
+            <span class="input-group-text rounded-start"><i class="fa fa-lock"></i></span>
+            <input type="{{tipoInput}}" name="confSenha" class="form-control " placeholder="Confirmar senha" required
+              [(ngModel)]="confSenha" (input)="comparaSenha()">
+            <span id="mostrarSenha" style="cursor: pointer;" class="input-group-text fa"
+              [ngClass]="{'fa-eye': tipoInput === 'password', 'fa-eye-slash': tipoInput === 'text'}"
+              (click)="mostrarSenha()"></span>
           </div>
           <div *ngIf="!compara" class=" alert alert-danger">Senhas não conferem.</div>
         </div>
@@ -67,7 +90,7 @@
 
     </div>
     <div class="modal-footer">
-      <a class="link-button" style="cursor: pointer;" (click)="modal.dismiss()">
+      <a class="link-button" style="cursor: pointer;" (click)="modal.dismiss(); tipoInput = 'password'">
         Cancelar
       </a>
       <button type="button" class="btn btn-primary" (click)="criarUsuario()">

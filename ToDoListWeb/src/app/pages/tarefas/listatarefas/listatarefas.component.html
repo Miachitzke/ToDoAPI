@@ -1,9 +1,32 @@
 <div class="container h-100">
     <section class="h-100">
         <div class="card-hover-shadow-2x mb-3 card">
-            <div class="card-header-tab card-header">
-                <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-                        class="fa fa-tasks"></i>&nbsp;{{ tituloLista }}</div>
+            <div class="controle-search d-flex justify-content-between align-items-center gap-5 mb-3">
+                <div id="filtro-tarefa">
+                    <input type="text" class="form-control " placeholder="Buscar Tarefa" [(ngModel)]="filtro">
+                </div>
+                <div id="btn-listas" class="btn-group">
+                    <button class="btn"><i class="fa fa-search fa-lg"></i></button>
+                    <button type="button" class="btn btn-sm dropdown-toggle" (click)="toggleOrdenacao()"
+                        data-bs-toggle="dropdown"><i class="fa fa-filter fa-lg"></i></button>
+                    <ul class="dropdown-menu dropdown-menu-end" [ngClass]="{ 'show': isOrdemOpen }"
+                        data-bs-auto-close="true">
+                        <li><a class="dropdown-item" disabled>Ordenar Listas</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(1)"><i class="fa fa-arrow-down-1-9"></i> ID
+                                (Crescente)</a></li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(0)"><i class="fa fa-arrow-down-9-1"></i> ID
+                                (Decrescente)</a></li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(2)"><i class="fa fa-arrow-down-a-z"></i>
+                                Título (Crescente)</a></li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(3)"><i class="fa fa-arrow-down-z-a"></i>
+                                Título (Decrescente)</a></li>
+                        <li><a class="dropdown-item" (click)="ordenarLista(4)"><i class="fa fa-shuffle"></i> Ordenação
+                                Padrão</a></li>
+                    </ul>
+                </div>
             </div>
             
             <div class="ps-content">
@@ -11,7 +34,7 @@
                     <li class="btn d-block bg-light" (click)="openModal()" style="cursor: pointer;">
                         <h6 class="mt-2 " style="cursor: pointer;"><i class="fa fa-plus"></i> Nova Tarefa</h6>
                     </li>
-                    <li class="list-group-item " *ngFor="let tarefa of tarefas; trak" >
+                    <li class="list-group-item " *ngFor="let tarefa of tarefaFiltrada">
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left mr-2">
