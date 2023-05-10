@@ -46,9 +46,11 @@ export class TarefasService {
     return this.http.delete(url);
   }
 
-  concluirTarefa(id: number) {
-    return new Promise((resolve, reject) => {
-        const url = this.API.getBaseUrl() + '/Tarefa/Concluir/' + id;
+  concluirTarefa(id: number):Observable<any> {
+    const url = this.API.getBaseUrl() + '/Tarefa/Concluir/' + id;
+    return this.http.post(url,id);
+
+    /* return new Promise((resolve, reject) => {
         let code = '';
         try {
             this.http.post(url, id).subscribe(response => {
@@ -60,7 +62,7 @@ export class TarefasService {
         console.log(error);
         reject();
         }
-    });
-  }
+    });*/
+  } 
 
 }

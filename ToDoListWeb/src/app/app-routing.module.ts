@@ -23,7 +23,7 @@ const routes: Routes = [
     path: 'editarlista/:id',component:ListaTarefasComponent,
   },
   {
-    path: 'listartarefas/:idLista',component: ListaTarefasComponent,
+    path: 'listartarefas/:idLista',component: ListaTarefasComponent, canActivate: [UsuarioAutenticadoGuard]
   },
   {
     path: 'novatarefa',component: TarefasComponent,

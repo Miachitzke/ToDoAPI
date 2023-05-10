@@ -52,13 +52,14 @@ export class ListaTarefasComponent implements OnInit {
         
         if (response) {
             response.forEach(e => {
-                if (e.status != "2")
-                this.tarefas.push(e)
+                if (e.status != "2") {
+                  this.tarefaOriginal = [...response];
+
+                  this.tarefaFiltrada = this.tarefaOriginal.sort((a, b) => b.id! - a.id!);
+                }
+                  
             });
         }
-
-          this.tarefaFiltrada = this.tarefaOriginal.sort((a, b) => b.id! - a.id!);
-
       });
 
       
@@ -166,17 +167,19 @@ export class ListaTarefasComponent implements OnInit {
     }
   }
 
-  deletarTarefa(id: number) {;
-    if (this.tarefaSelecionada) {
-      this.tarefasService.deletarTarefa(id).then(() => {
-          this.listarTarefas();
-      });
-    }
-  }
-
   concluirTarefa(idTarefa: number) {
+    if(idTarefa) {
+      if(this.tarefaSelecionada.id!){
+        this.tarefasService.concluirTarefa(this.tarefaSelecionada.id!).subscribe((response)=> {
+          if(response) {
+            this.listarTarefas();
+          }
+        });
+      }
+    }
 
-    if (idTarefa) {
+
+    /* if (idTarefa) {
       if (this.tarefaSelecionada) {
         this.tarefasService.concluirTarefa(idTarefa).then(() => {
             this.listarTarefas();
@@ -185,7 +188,8 @@ export class ListaTarefasComponent implements OnInit {
     }
     else {
       alert("A tarefa não pôde ser concluída!");
-    }
+    } */
+
   }
 
   openModal(tarefa?: ITarefas) {
