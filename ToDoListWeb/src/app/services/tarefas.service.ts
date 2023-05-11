@@ -24,21 +24,25 @@ export class TarefasService {
     return this.http.post(url, tarefa)
   }
 
-  atualizarTarefa(tarefa: ITarefas) {
-    return new Promise((resolve, reject) => {
-        const url = this.API.getBaseUrl() + '/Tarefa/' + tarefa.id;
-        let code = '';
-        try {
-            this.http.put(url, tarefa).subscribe(response => {
-                code = response.toString();
-                if (code)
-                    resolve(code);
-            });
-        } catch (error) {
-          console.log(error);
-          reject();
-        }
-    });
+  atualizarTarefa(tarefa: ITarefas):Observable<any> {
+    
+    const url = this.API.getBaseUrl() + '/Tarefa/' + tarefa.id;
+    return this.http.put(url, tarefa);
+
+    // return new Promise((resolve, reject) => {
+    //     const url = this.API.getBaseUrl() + '/Tarefa/' + tarefa.id;
+    //     let code = '';
+    //     try {
+    //         this.http.put(url, tarefa).subscribe(response => {
+    //             code = response.toString();
+    //             if (code)
+    //                 resolve(code);
+    //         });
+    //     } catch (error) {
+    //       console.log(error);
+    //       reject();
+    //     }
+    // });
   }
 
   deletarTarefa(idTarefa: number): Observable<any> {
@@ -46,23 +50,23 @@ export class TarefasService {
     return this.http.delete(url);
   }
 
-  concluirTarefa(id: number):Observable<any> {
+  concluirTarefa(id: number) {
     const url = this.API.getBaseUrl() + '/Tarefa/Concluir/' + id;
     return this.http.post(url,id);
 
-    /* return new Promise((resolve, reject) => {
-        let code = '';
-        try {
-            this.http.post(url, id).subscribe(response => {
-                code = response.toString();
-                if (code)
-                    resolve(code);
-            });
-        } catch (error) {
-        console.log(error);
-        reject();
-        }
-    });*/
+    // return new Promise((resolve, reject) => {
+    //     let code = '';
+    //     try {
+    //         this.http.post(url, id).subscribe(response => {
+    //             code = response.toString();
+    //             if (code)
+    //                 resolve(code);
+    //         });
+    //     } catch (error) {
+    //     console.log(error);
+    //     reject();
+    //     }
+    // });
   } 
 
 }

@@ -48,6 +48,8 @@ namespace ToDoAPI.Repository.Implementations
             tarefaPorId.Titulo = tarefa.Titulo;
             tarefaPorId.Descricao = tarefa.Descricao;
             tarefaPorId.Status = tarefa.Status;
+            tarefaPorId.DataLimite = tarefa.DataLimite;
+            tarefaPorId.Prioridade = tarefa.Prioridade;
 
             _dbContext.Tarefa.Update(tarefaPorId);
             await _dbContext.SaveChangesAsync();

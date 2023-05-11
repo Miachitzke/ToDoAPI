@@ -43,7 +43,8 @@ export class ListaTarefasComponent implements OnInit {
   listarTarefas() {
 
     this.route.paramMap.subscribe((params) => {
-      this.idLista = +params.get('idLista')!});
+      this.idLista = +params.get('idLista')!
+    });
 
     this.tarefas = [];
 
@@ -51,15 +52,14 @@ export class ListaTarefasComponent implements OnInit {
       this.tarefasService.listarTarefas(this.idLista).subscribe(response => {
         
         if (response) {
+            this.tarefaOriginal = [];
             response.forEach(e => {
                 if (e.status != "2") {
-                  this.tarefaOriginal = [...response];
-
-                  this.tarefaFiltrada = this.tarefaOriginal.sort((a, b) => b.id! - a.id!);
-                  this.tarefas = this.tarefaFiltrada.slice();
+                  this.tarefaOriginal.push(e);
                 }
-                  
             });
+            this.tarefaFiltrada = this.tarefaOriginal.sort((a, b) => b.id! - a.id!);
+            this.tarefas = this.tarefaFiltrada.slice();
         }
       });
 
@@ -163,22 +163,21 @@ export class ListaTarefasComponent implements OnInit {
         console.log(this.tarefaSelecionada);
         
 
-      this.tarefasService.atualizarTarefa(this.tarefaSelecionada).then(() => {
-        this.listarTarefas();
+      this.tarefasService.atualizarTarefa(this.tarefaSelecionada).subscribe((response) => {
+        if (response)
+          this.listarTarefas();
       });
     }
   }
 
   concluirTarefa(idTarefa: number) {
     if(idTarefa) {
-      if(this.tarefaSelecionada.id!){
-        this.tarefasService.concluirTarefa(this.tarefaSelecionada.id!).subscribe((response)=> {
-          if(response) {
-            this.listarTarefas();
-            console.log(response)
-          }
+        this.tarefasService.concluirTarefa(idTarefa).subscribe((response)=> {
+            if(response) {
+                this.listarTarefas();
+                this.modalService.dismissAll();
+            }
         });
-      }
     }
     else {
       alert('Tarefa não pode ser concluida');
