@@ -16,6 +16,7 @@ namespace ToDoAPI.Models
         public int? Prioridade { get; set; }
         public StatusTarefa? Status { get; set; }
         public byte[]? Anexo { get; set; }
+        public string? Etiqueta { get; set; }
         public int CriadorID { get; set; }
         public int? UltAlteradorID { get; set; }
         public ICollection<Tarefa>? Subtarefas { get; set; }

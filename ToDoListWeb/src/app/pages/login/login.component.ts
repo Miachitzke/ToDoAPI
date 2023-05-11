@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
     cadSucesso = false;
     loginSucesso =true;
-    imgLogo : string = "assets/todo_logo_transparente.png";
+    imgLogo : string = "assets/logoA.png";
 
     constructor(private formBuilder: FormBuilder,
         private usuarioService: UsuarioService,

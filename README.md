@@ -18,7 +18,7 @@
  -----------------
  
  - Iniciar a API no VS 
- - Iniciar Front-End com **ng serve**
+ - Iniciar Front-End no VS Code com **ng serve**
  
  ----------------
 ## Programa pronto para utilização
