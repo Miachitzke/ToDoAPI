@@ -37,7 +37,9 @@ export class ListaTarefasComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-      this.listarTarefas();
+    this.route.params.subscribe(() => { 
+        this.listarTarefas();
+    });
   }
 
   listarTarefas() {
