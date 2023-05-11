@@ -20,7 +20,7 @@ export class AppComponent {
 
   sidebarExpanded = true;
 
-  imgLogo : string = "assets/todo_logo_branco.png";
+  imgLogo : string = "assets/logoB.png";
 
   constructor(private rota: Router, private usuarioService: UsuarioService, public auth: UsuarioAutenticadoGuard) {
     rota.events.subscribe((event) => {
