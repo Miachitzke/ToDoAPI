@@ -16,6 +16,7 @@ export class AppComponent {
   rotasNaoMostrar = ['login', 'novousuario', '**', ''];
 
   mostrarMenu: boolean = false;
+  isDarkMode = false;
 
   sidebarExpanded = true;
 
@@ -35,7 +36,6 @@ export class AppComponent {
     });
   }
 
-
   ngOnInit() {
 
     this.usuarioService.mostrarMenuEmitter.subscribe(
@@ -54,4 +54,7 @@ export class AppComponent {
     this.usuarioService.deslogar();
   }
 
+  setDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+  }
 }

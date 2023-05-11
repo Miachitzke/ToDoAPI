@@ -2,8 +2,11 @@
     <section class="h-100">
         <div class="card-hover-shadow-2x mb-3 card">
             <div class="controle-search d-flex justify-content-between align-items-center gap-5 mb-3">
-                <div id="filtro-tarefa">
+                <div id="filtro-tarefa" class="input-group">
                     <input type="text" class="form-control " placeholder="Buscar Tarefa" [(ngModel)]="filtro">
+                    <div class="input-group-append" *ngIf="filtro && filtro.trim().length > 0" style="position: absolute; top: 50%; right: 8px; transform: translateY(-50%)">
+                        <button class="btn btn-outline-secondary" type="button" (click)="filtro=''"><i class="fas fa-times"></i></button>
+                    </div>
                 </div>
                 <div id="btn-listas" class="btn-group">
                     <button class="btn"><i class="fa fa-search fa-lg"></i></button>

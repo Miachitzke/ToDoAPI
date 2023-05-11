@@ -56,6 +56,7 @@ export class ListaTarefasComponent implements OnInit {
                   this.tarefaOriginal = [...response];
 
                   this.tarefaFiltrada = this.tarefaOriginal.sort((a, b) => b.id! - a.id!);
+                  this.tarefas = this.tarefaFiltrada.slice();
                 }
                   
             });
@@ -145,6 +146,7 @@ export class ListaTarefasComponent implements OnInit {
       this.tarefasService.criarNovaTarefa(this.tarefaSelecionada).subscribe( (response)=> {
         if(response)
           this.listarTarefas();
+          console.log(response)
       });
     }
   }
@@ -173,22 +175,14 @@ export class ListaTarefasComponent implements OnInit {
         this.tarefasService.concluirTarefa(this.tarefaSelecionada.id!).subscribe((response)=> {
           if(response) {
             this.listarTarefas();
+            console.log(response)
           }
         });
       }
     }
-
-
-    /* if (idTarefa) {
-      if (this.tarefaSelecionada) {
-        this.tarefasService.concluirTarefa(idTarefa).then(() => {
-            this.listarTarefas();
-        });
-      }
-    }
     else {
-      alert("A tarefa não pôde ser concluída!");
-    } */
+      alert('Tarefa não pode ser concluida');
+    }
 
   }
 

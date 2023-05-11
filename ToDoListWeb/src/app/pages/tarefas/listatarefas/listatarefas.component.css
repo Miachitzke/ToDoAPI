@@ -9,9 +9,9 @@ body {
     background-color: #6200EA;
 }
 
-.container{
+.container {
     height: 100%;
-    margin-top:60px;
+    margin-top: 60px;
     margin-bottom: 20px;
 }
 
@@ -37,7 +37,7 @@ body {
     background-color: #fff;
 }
 
-.widget-subheading{
+.widget-subheading {
     color: #858a8e;
     font-size: 10px;
 }
@@ -114,11 +114,11 @@ body {
 }
 
 .circulo-menor {
-    fill:#0F0F0F;
+    fill: #0F0F0F;
 }
 
 .fill-urgente {
-    fill: #FF5269 ;
+    fill: #FF5269;
 }
 
 .fill-importante {
@@ -134,7 +134,7 @@ body {
 }
 
 .prazo-urgente {
-    color: #f73224 ;
+    color: #f73224;
 }
 
 .prazo-importante {
@@ -190,13 +190,13 @@ body {
     border-color: #295bda;
 }
 
-.btn { 
+.btn {
     position: relative;
     transition: color 0.15s, background-color 0.15s, border-color 0.15s, box-shadow 0.15s;
     outline: none !important;
 }
 
-.card-footer{
+.card-footer {
     background-color: #fff;
 }
 
@@ -217,23 +217,48 @@ body {
 }
 
 .no-overflow {
-    overflow:hidden;
+    overflow: hidden;
 }
 
 .controle-search {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content:space-between;
+    justify-content: space-between;
     column-gap: 4px;
     margin-top: 10px;
     margin-left: 35px;
 }
 
-#filtro-tarefa {    
+#filtro-tarefa {
     width: 90%;
 }
 
 #btn-listas {
     margin-right: 45px;
+}
+
+
+.input-group {
+    position: relative;
+}
+
+.input-group-append {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.input-group-append button {
+    border: none;
+    background: transparent;
+    color: #aaa;
+}
+
+.input-group-append button:hover {
+    color: #7a7a7aaa;
+    cursor: pointer;
 }
