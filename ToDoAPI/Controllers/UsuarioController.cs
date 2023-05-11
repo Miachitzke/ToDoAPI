@@ -20,7 +20,8 @@ namespace ToDoAPI.Controllers
         {
             try
             {
-                var usuarioFiltrado = await _usuarioRepository.BuscaUsuario(usuario.email, usuario.senha);
+                var senhaCriptografada = CriptoSvc.Criptografar(usuario.senha);
+                var usuarioFiltrado = await _usuarioRepository.BuscaUsuario(usuario.email, senhaCriptografada);
 
                 if (usuarioFiltrado == null)
                 {
@@ -54,6 +55,7 @@ namespace ToDoAPI.Controllers
         [HttpPost("Cadastrar")]
         public async Task<ActionResult<Usuario>> Cadastrar([FromBody] Usuario usuarioACadastrar)
         {
+            usuarioACadastrar.Senha = CriptoSvc.Criptografar(usuarioACadastrar.Senha);
             Usuario usuario = await _usuarioRepository.Adicionar(usuarioACadastrar);
             return Ok(usuario);
         }
@@ -62,6 +64,7 @@ namespace ToDoAPI.Controllers
         public async Task<ActionResult<Usuario>> Atualizar([FromBody] Usuario usuarioAtualizado, int id)
         {
             usuarioAtualizado.ID = id;
+            usuarioAtualizado.Senha = CriptoSvc.Criptografar(usuarioAtualizado.Senha);
             Usuario usuario = await _usuarioRepository.Atualizar(usuarioAtualizado, id);
             return Ok(usuario);
         }
